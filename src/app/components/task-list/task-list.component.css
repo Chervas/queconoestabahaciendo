@@ -1,0 +1,142 @@
+/* Task List Controls - Material 3 Refactor v4 (Pixel Perfect) */
+.m3-task-list-container {
+  /* Container for the entire task list section including title */
+}
+
+/* .m3-section-title is defined globally in styles.css */
+
+.m3-list-controls {
+  display: flex;
+  justify-content: flex-start; /* Align to the left */
+  margin-bottom: var(--app-spacing-card-padding);
+}
+
+/* Issue-003: Ajustar colores de los segmented buttons */
+.m3-filter-segmented-button-group.mat-mdc-button-toggle-group {
+  border: 1px solid #CFCCC3; /* Color de borde más sutil que el fondo, revisar referencia */
+  border-radius: var(--app-border-radius-chip); /* Group rounding */
+  overflow: hidden; /* Ensures inner button borders don't stick out */
+  display: flex;
+  background-color: #F7F4E6; /* Fondo del grupo según feedback */
+}
+
+.m3-filter-segmented-button.mat-mdc-button-toggle {
+  background-color: transparent; /* Botones individuales transparentes sobre el fondo del grupo */
+  color: var(--app-light-on-surface-variant); /* Texto para botones no seleccionados, asegurar contraste con #F7F4E6 */
+  font-size: var(--app-font-size-chip-filter-button);
+  font-weight: var(--app-font-weight-chip-filter-button);
+  padding: var(--app-spacing-chip-padding-y) var(--app-spacing-chip-padding-x);
+  border-radius: 0; /* Individual buttons are not rounded, group is */
+  border: none; /* Remove individual borders */
+  border-right: 1px solid #CFCCC3; /* Separador, mismo color que el borde del grupo */
+  line-height: normal;
+  height: auto;
+  flex-grow: 1; /* Allow buttons to grow and fill space if needed */
+  justify-content: center; /* Center content within button */
+}
+
+/* Requisito V5-005: Hide the pseudo checkbox to prevent double check mark */
+:host ::ng-deep .m3-filter-segmented-button.mat-mdc-button-toggle .mat-pseudo-checkbox {
+  display: none !important;
+}
+
+.m3-filter-segmented-button.mat-mdc-button-toggle:last-child {
+  border-right: none;
+}
+
+/* No se necesita modo oscuro específico para el grupo si el color #F7F4E6 es fijo */
+/* .dark-theme .m3-filter-segmented-button.mat-mdc-button-toggle {
+  color: var(--app-dark-filter-unselected-text);
+  border-right-color: var(--app-dark-outline);
+} */
+
+.m3-filter-segmented-button.mat-mdc-button-toggle.mat-button-toggle-checked {
+  background-color: var(--app-light-primary-container, #EADDFF); /* Color de fondo para seleccionado (ej. primary container) */
+  color: var(--app-light-on-primary-container, #21005D); /* Color de texto para seleccionado (ej. on primary container) */
+  /* border: 1px solid var(--app-light-outline); /* No necesita borde individual si el grupo lo tiene y el fondo cambia */
+  /* margin: -1px; */ /* No necesario si no hay borde individual */
+  box-shadow: var(--app-elevation-1); /* Sombra sutil para destacar el seleccionado */
+}
+
+.dark-theme .m3-filter-segmented-button.mat-mdc-button-toggle.mat-button-toggle-checked {
+  background-color: var(--app-dark-primary-container, #633B48); /* Ajustar a paleta oscura */
+  color: var(--app-dark-on-primary-container, #FFD8E4); /* Ajustar a paleta oscura */
+  box-shadow: var(--app-elevation-dark-1); /* Sombra sutil para destacar el seleccionado en modo oscuro */
+}
+
+.m3-filter-segmented-button.mat-mdc-button-toggle .mat-icon {
+  margin-right: var(--app-spacing-internal-card-secondary);
+  font-size: 18px;
+  vertical-align: middle;
+}
+
+.m3-filter-segmented-button.mat-mdc-button-toggle span {
+ vertical-align: middle;
+}
+
+/* Empty State & Loading State for Task List */
+.m3-pending-tasks-empty-state.m3-empty-state-card { /* TPV01, TPV02 */
+  background-color: #FBF9EF; /* Color crema claro de referencia */
+  border-radius: var(--app-border-radius-card); /* Asegurar radio de borde */
+  border: 1px solid transparent; /* Quitar borde si no lo tiene en referencia, o ajustar a --app-light-outline si sí */
+  margin-top: var(--app-spacing-card-padding);
+  display: flex; /* Added for vertical centering of content */
+  flex-direction: column; /* Added for vertical centering of content */
+  justify-content: center; /* Added for vertical centering of content */
+  align-items: center; /* Added for horizontal centering of content */
+  min-height: 250px; /* Approximate height of the progress card, adjust as needed */
+}
+
+.m3-task-list-container.empty-state-aligned .m3-pending-tasks-empty-state.m3-empty-state-card {
+    /* This class would be dynamically added to m3-task-list-container when empty and alignment is needed */
+}
+
+.m3-pending-tasks-empty-state .m3-empty-state-content {
+    text-align: center; /* Ensure content within is centered */
+}
+
+.m3-pending-tasks-empty-state .m3-empty-state-text-primary {
+  color: var(--app-light-on-surface); /* Asegurar color de texto primario */
+}
+
+:host ::ng-deep .m3-pending-tasks-empty-state .m3-button-add-task-empty-state.mat-mdc-flat-button {
+  background-color: #A0D9D3 !important; /* Verde azulado claro */
+  color: #FFFFFF !important; /* Texto e icono blancos */
+  border-radius: var(--app-border-radius-button-pill) !important;
+  padding: var(--app-spacing-add-button-padding-y) var(--app-spacing-add-button-padding-x) !important;
+}
+
+:host ::ng-deep .m3-pending-tasks-empty-state .m3-button-add-task-empty-state.mat-mdc-flat-button .mdc-button__label,
+:host ::ng-deep .m3-pending-tasks-empty-state .m3-button-add-task-empty-state.mat-mdc-flat-button mat-icon {
+  color: #FFFFFF !important;
+}
+
+.m3-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px var(--app-spacing-card-padding);
+  color: var(--app-light-on-surface-variant);
+}
+
+.dark-theme .m3-loading-state {
+  color: var(--app-dark-on-surface-variant);
+}
+
+.m3-loading-text {
+  margin-top: var(--app-spacing-internal-card-primary);
+  font-size: var(--app-font-size-description);
+}
+
+.m3-tasks-scroll-container {
+  /* If specific scroll container styles are needed */
+}
+
+
+.m3-section-title {
+  margin-top: 0;
+}
+
+
+

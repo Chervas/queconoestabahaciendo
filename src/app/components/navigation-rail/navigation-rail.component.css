@@ -1,0 +1,179 @@
+.navigation-rail {
+  display: flex;
+  transition: all 0.3s ease;
+  z-index: 100;
+  background-color: var(--app-light-background, #FFFFFF);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para fase de trabajo */
+.navigation-rail.work-phase {
+  background-color: #FFF8E1; /* Tono crema/beige claro como en la captura */
+}
+
+/* Estilos para fase de recreo */
+.navigation-rail.recreation-phase {
+  background-color: var(--app-light-primary, #7b965d); /* Verde como en la toolbar de la isla */
+}
+
+/* Estilos para desktop (menú lateral) */
+@media (min-width: 768px) {
+  .navigation-rail {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 72px;
+    flex-direction: column;
+    padding-top: 16px;
+    transition: width 0.3s ease;
+  }
+  
+  .navigation-rail.expanded {
+    width: 200px;
+  }
+  
+  .nav-items-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 16px;
+    width: 100%;
+  }
+  
+  .menu-toggle {
+    align-self: center;
+    margin-bottom: 16px;
+  }
+}
+
+/* Estilos para móvil (menú inferior) */
+@media (max-width: 767px) {
+  .navigation-rail {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+  }
+  
+  .nav-items-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Estilos comunes para elementos de navegación */
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+  padding: 8px;
+  margin: 4px;
+  position: relative;
+}
+
+/* Estilos para desktop */
+@media (min-width: 768px) {
+  .nav-item {
+    /* Eliminado width: calc(100% - 16px); según feedback */
+    justify-content: center;
+    margin: 4px 8px;
+  }
+  
+  .navigation-rail.expanded .nav-item {
+    padding: 8px 16px;
+    flex-direction: row;
+    justify-content: flex-start; /* Mantener alineación a la izquierda cuando está expandido */
+  }
+  
+  .navigation-rail.expanded .nav-label {
+    margin-left: 16px;
+    margin-top: 0;
+  }
+}
+
+/* Estilos para móvil */
+@media (max-width: 767px) {
+  .nav-item {
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4px 0;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+/* Estilos para íconos */
+.nav-icon {
+  font-size: 24px;
+  height: 24px;
+  width: 24px;
+  transition: all 0.2s ease;
+}
+
+/* Estilos para etiquetas */
+.nav-label {
+  font-size: 12px;
+  margin-top: 4px;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Estilos para elementos activos en fase de trabajo */
+.work-phase .nav-item.active {
+  background-color: rgba(123, 150, 93, 0.12); /* Verde primario con opacidad */
+  color: var(--app-light-primary, #7b965d);
+}
+
+/* Estilos para elementos inactivos en fase de trabajo */
+.work-phase .nav-item:not(.active) {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Estilos para elementos activos en fase de recreo */
+.recreation-phase .nav-item.active {
+  background-color: #FFEB3B; /* Amarillo como en la captura */
+  color: #000000; /* Texto negro para contraste */
+}
+
+/* Estilos para elementos inactivos en fase de recreo */
+.recreation-phase .nav-item:not(.active) {
+  color: rgba(255, 255, 255, 0.9); /* Texto blanco con alta opacidad */
+}
+
+/* Estilos para hover en elementos */
+.nav-item:hover:not(.active) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.recreation-phase .nav-item:hover:not(.active) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Ajustes para el contenido principal */
+:host-context(.main-content-with-rail) {
+  padding-left: 72px;
+}
+
+@media (min-width: 768px) {
+  :host-context(.main-content-with-rail.expanded) {
+    padding-left: 200px;
+  }
+}
+
+@media (max-width: 767px) {
+  :host-context(.main-content-with-rail) {
+    padding-left: 0;
+    /* Eliminado padding-bottom: 56px; según feedback */
+  }
+}

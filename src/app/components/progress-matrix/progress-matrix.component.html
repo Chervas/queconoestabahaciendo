@@ -1,0 +1,13 @@
+<div class="progress-matrix">
+  <div class="matrix-container">
+    <!-- Matriz uniforme de puntos para visualizar el progreso -->
+    <div class="matrix-row" *ngFor="let row of matrixRows; let i = index">
+      <div class="matrix-dot" 
+           *ngFor="let dot of row" 
+           [class.filled]="dot.filled"
+           [class.today]="dot.isToday"
+           [ngStyle]="getDotStyle(dot)">
+      </div>
+    </div>
+  </div>
+</div>

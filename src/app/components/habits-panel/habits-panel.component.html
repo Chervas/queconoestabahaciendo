@@ -1,0 +1,233 @@
+<div class="habits-panel-container">
+  <!-- Integración con el navigation rail -->
+  <app-navigation-rail [currentSection]="'habits'" [currentPhase]="currentPhase"></app-navigation-rail>
+
+  <!-- Sidenav para formulario de hábitos -->
+  <mat-sidenav-container class="habits-sidenav-container">
+    <mat-sidenav #habitFormSidenav mode="over" position="end" class="habit-form-sidenav" 
+                 [opened]="isSidenavOpen" (closedStart)="closeHabitFormSidenav()">
+      <app-habit-form 
+        *ngIf="isSidenavOpen" 
+        [habitToEdit]="currentHabitForForm" 
+        (formSubmit)="handleHabitFormSubmit($event)" 
+        (closeSidenav)="closeHabitFormSidenav()">
+      </app-habit-form>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="habits-content main-container main-content-with-rail">
+        <div class="habits-layout">
+          <!-- Columna izquierda: Hábitos -->
+          <div class="habits-column">
+            <!-- Mensaje cuando no hay hábitos -->
+            <div *ngIf="!hasHabits" class="no-habits-message">
+              <mat-card>
+                <mat-card-content>
+                  <p>Crea tu primer hábito: por ejemplo, ir al gimnasio. Completar hábitos es una forma saludable de establecer rutinas, y además favorece a que tu isla se desarrolle mejor.</p>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            
+            <!-- CORRECCIÓN: Sección de hábitos diarios - Eliminar límite de 4 tarjetas -->
+            <div *ngIf="dailyHabits.length > 0" class="habits-section">
+              <h2 class="section-title">Hábitos diarios</h2>
+              <div class="habits-grid">
+                <!-- CORRECCIÓN: Usar un solo contenedor flexible para todas las tarjetas -->
+                <div class="habits-cards-container">
+                  <div class="habits-card-wrapper" *ngFor="let habit of dailyHabits">
+                    <app-habit-item 
+                      [habit]="habit"
+                      (trackProgress)="trackHabitProgress($event)"
+                      (editHabit)="openHabitFormSidenav($event)"
+                      (deleteHabit)="deleteHabit($event)">
+                    </app-habit-item>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CORRECCIÓN: Sección de hábitos semanales - Eliminar límite de 4 tarjetas -->
+            <div *ngIf="weeklyHabits.length > 0" class="habits-section">
+              <h2 class="section-title">Hábitos semanales</h2>
+              <div class="habits-grid">
+                <!-- CORRECCIÓN: Usar un solo contenedor flexible para todas las tarjetas -->
+                <div class="habits-cards-container">
+                  <div class="habits-card-wrapper" *ngFor="let habit of weeklyHabits">
+                    <app-habit-item 
+                      [habit]="habit"
+                      (trackProgress)="trackHabitProgress($event)"
+                      (editHabit)="openHabitFormSidenav($event)"
+                      (deleteHabit)="deleteHabit($event)">
+                    </app-habit-item>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- CORRECCIÓN: Sección de hábitos mensuales - Eliminar límite de 4 tarjetas -->
+            <div *ngIf="monthlyHabits.length > 0" class="habits-section">
+              <h2 class="section-title">Hábitos mensuales</h2>
+              <div class="habits-grid">
+                <!-- CORRECCIÓN: Usar un solo contenedor flexible para todas las tarjetas -->
+                <div class="habits-cards-container">
+                  <div class="habits-card-wrapper" *ngFor="let habit of monthlyHabits">
+                    <app-habit-item 
+                      [habit]="habit"
+                      (trackProgress)="trackHabitProgress($event)"
+                      (editHabit)="openHabitFormSidenav($event)"
+                      (deleteHabit)="deleteHabit($event)">
+                    </app-habit-item>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CORRECCIÓN: Sección de hábitos de tipo "dejar algo" - Eliminar límite de 4 tarjetas -->
+            <div *ngIf="quitHabits.length > 0" class="habits-section">
+              <h2 class="section-title">Otros</h2>
+              <div class="habits-grid">
+                <!-- CORRECCIÓN: Usar un solo contenedor flexible para todas las tarjetas -->
+                <div class="habits-cards-container">
+                  <div class="habits-card-wrapper" *ngFor="let habit of quitHabits">
+                    <app-habit-item 
+                      [habit]="habit"
+                      (trackProgress)="trackHabitProgress($event)"
+                      (editHabit)="openHabitFormSidenav($event)"
+                      (deleteHabit)="deleteHabit($event)">
+                    </app-habit-item>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Columna derecha: Estado -->
+          <div class="estado-column">
+            <h2 class="section-title">Estado</h2>
+            
+            <!-- Sección de clima con iconos pixelados -->
+            <div class="estado-card weather-card">
+              <div class="weather-icons">
+                <div class="pixel-icon sun-pixel"></div>
+                <div class="pixel-icon cloud-pixel"></div>
+              </div>
+              
+              <div class="weather-prediction">
+                <h3>Predicción del tiempo</h3>
+                <p class="weather-subtitle">En base a tus hábitos</p>
+                
+                <div class="weather-days">
+                  <div class="weather-day">
+                    <div class="weather-icon sun-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Lunes</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Despejado</span>
+                  </div>
+                  
+                  <div class="weather-day">
+                    <div class="weather-icon cloud-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Martes</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Nublado</span>
+                  </div>
+                  
+                  <div class="weather-day">
+                    <div class="weather-icon sun-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Miércoles</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Despejado</span>
+                  </div>
+                  
+                  <div class="weather-day">
+                    <div class="weather-icon sun-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Jueves</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Despejado</span>
+                  </div>
+                  
+                  <div class="weather-day">
+                    <div class="weather-icon sun-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Viernes</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Despejado</span>
+                  </div>
+                  
+                  <div class="weather-day">
+                    <div class="weather-icon sun-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Sábado</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Despejado</span>
+                  </div>
+                  
+                  <div class="weather-day">
+                    <div class="weather-icon sun-icon"></div>
+                    <div class="weather-day-info">
+                      <span class="day-name">Domingo</span>
+                      <span class="day-temp">19°</span>
+                    </div>
+                    <span class="weather-condition">Despejado</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Sección de hábitos completados -->
+            <div class="estado-card habits-completed-card">
+              <h3>Hábitos completados</h3>
+              
+              <div class="habits-stats">
+                <div class="habit-stat-item">
+                  <div class="habit-stat-label">Diarios</div>
+                  <div class="habit-stat-progress-bar">
+                    <div class="habit-stat-progress" [style.width]="(completedDailyCount / (dailyHabits.length || 1)) * 100 + '%'"></div>
+                  </div>
+                  <div class="habit-stat-value">{{ completedDailyCount }}/{{ dailyHabits.length }}</div>
+                </div>
+                
+                <div class="habit-stat-item">
+                  <div class="habit-stat-label">Semanales</div>
+                  <div class="habit-stat-progress-bar">
+                    <div class="habit-stat-progress" [style.width]="(completedWeeklyCount / (weeklyHabits.length || 1)) * 100 + '%'"></div>
+                  </div>
+                  <div class="habit-stat-value">{{ completedWeeklyCount }}/{{ weeklyHabits.length }}</div>
+                </div>
+                
+                <!-- CORRECCIÓN: Añadir barra de progreso para hábitos mensuales -->
+                <div class="habit-stat-item" *ngIf="monthlyHabits.length > 0">
+                  <div class="habit-stat-label">Mensuales</div>
+                  <div class="habit-stat-progress-bar">
+                    <div class="habit-stat-progress" [style.width]="(completedMonthlyCount / (monthlyHabits.length || 1)) * 100 + '%'"></div>
+                  </div>
+                  <div class="habit-stat-value">{{ completedMonthlyCount }}/{{ monthlyHabits.length }}</div>
+                </div>
+              </div>
+              
+              <p class="habits-impact-message">
+                Tus hábitos completados hoy influyen en el tiempo de tu isla más adelante
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>
+
+<!-- Botón flotante para crear hábito -->
+<button mat-extended-fab class="add-task-fab" (click)="openHabitFormSidenav()" aria-label="Crear nuevo hábito">
+  <mat-icon>add</mat-icon>
+  <span class="fab-text">Crear hábito</span>
+</button>

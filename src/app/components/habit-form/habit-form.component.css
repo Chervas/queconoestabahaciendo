@@ -1,0 +1,89 @@
+.habit-form-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  background-color: #FFFFFF;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.form-title {
+  font-size: var(--app-font-size-headline-medium, 20px);
+  font-weight: 500;
+  margin: 0;
+  color: var(--app-light-on-surface, #1C1B1F);
+}
+
+.habit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-section {
+  margin-bottom: 16px;
+}
+
+.section-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--app-light-on-surface, #1C1B1F);
+}
+
+.type-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.type-description {
+  font-size: 12px;
+  color: var(--app-light-on-surface-variant, #49454F);
+  margin-left: 8px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+/* Estilos para el modo oscuro */
+:host-context(.dark-theme) .habit-form-container {
+  background-color: var(--app-dark-surface, #1C1B1F);
+}
+
+:host-context(.dark-theme) .form-title,
+:host-context(.dark-theme) .section-label {
+  color: var(--app-dark-on-surface, #E6E1E5);
+}
+
+:host-context(.dark-theme) .type-description {
+  color: var(--app-dark-on-surface-variant, #CAC4D0);
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+  .habit-form-container {
+    padding: 12px;
+  }
+  
+  .form-title {
+    font-size: 18px;
+  }
+}

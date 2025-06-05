@@ -1,0 +1,553 @@
+/* Global Styles - QueCoñoEstabaHaciendo - Material 3 Refactor v7 (Pulido Final) */
+
+/* Importar la fuente Roboto si no está ya globalmente disponible por Angular Material */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+:root {
+  /* Paleta de Colores Primarios (Extraídos de material3.png y materila4.png) */
+  --app-light-background: #FFFFFF; /* CG01 - Fondo general de la aplicación */
+  --app-light-surface-container: #FBF9EF; /* Fondo Tarjetas Generales (Pendientes, Vacías) */
+  --app-active-task-card-background: #FBF9EF; /* Fondo específico para Tarjeta Activa (igual que pendientes) */
+  --app-light-on-surface: #1C1B1F; /* Texto Principal (Títulos de sección, Títulos de tarea) */
+  --app-light-on-surface-variant: #49454F; /* Texto Secundario (Subtítulos, Descripciones, icono reloj) */
+  --app-light-primary-action-text: #4E4C40; /* Texto Botón "Expandir" */
+  --app-light-outline: #CAC4D0; /* Borde sutil para filtros y tarjetas PENDIENTES */
+  --app-active-task-card-outline: transparent; /* Sin borde para Tarjeta Activa */
+
+  --app-light-complete-button-bg: #A0D9D3; /* Verde azulado claro para Completar */
+  --app-light-complete-button-text: #1C1B1F; /* Texto oscuro para Completar - CAMBIO SOLICITADO */
+
+  --app-light-chip-priority-bg: #F0EAD6; /* Crema/amarillento para chip prioridad y play/pause */
+  --app-light-chip-priority-text: #1C1B1F;
+  --app-light-priority-urgent-bg: #f3a18e;
+  --app-light-priority-urgent-text: #FFFFFF; 
+  --app-light-priority-high-bg: #F6E48F;
+  --app-light-priority-high-text: #1C1B1F; 
+  --app-light-priority-normal-bg: #F0EAD6; 
+  --app-light-priority-normal-text: #1C1B1F;
+  --app-light-priority-low-bg: #E0DCCD;
+  --app-light-priority-low-text: #1C1B1F; 
+  --app-light-icon-button-bg: #F0EAD6; 
+  --app-light-icon-button-fg: #1C1B1F;
+
+  /* Filtros de Tareas Pendientes (TPP01) */
+  --app-light-filter-selected-bg: #DCE7DA; 
+  --app-light-filter-selected-text: #1A1C19; 
+  --app-light-filter-unselected-bg: #F7F4E6; 
+  --app-light-filter-unselected-text: #49454F; 
+  --app-light-filter-unselected-border: #F7F4E6;  
+  --app-light-add-button-bg: #7b965d; /* Color para FAB y botón crear tarea sidenav - CAMBIO SOLICITADO */
+  --app-light-add-button-text: #FFFFFF; 
+
+  /* Dark Theme */
+  --app-dark-background: #121212; 
+  --app-dark-surface-container: #1E1E1E; 
+  --app-dark-active-task-card-background: #1E1E1E; 
+  --app-dark-on-surface: #E0E0E0; 
+  --app-dark-on-surface-variant: #BDBDBD; 
+  --app-dark-primary-action-text: #FFD54F; 
+  --app-dark-outline: #424242; 
+  --app-dark-active-task-card-outline: transparent;
+  
+  --app-dark-complete-button-bg: #388E3C; 
+  --app-dark-complete-button-text: #E0E0E0;
+  
+  --app-dark-chip-priority-bg: #3A3A3A; 
+  --app-dark-chip-priority-text: #E0E0E0;
+  --app-dark-priority-urgent-bg: #D32F2F; 
+  --app-dark-priority-urgent-text: #E0E0E0;
+  --app-dark-priority-high-bg: #FFA000; 
+  --app-dark-priority-high-text: #121212; 
+  --app-dark-priority-normal-bg: #3A3A3A; 
+  --app-dark-priority-normal-text: #E0E0E0;
+  --app-dark-priority-low-bg: #424242; 
+  --app-dark-priority-low-text: #E0E0E0;
+
+  --app-dark-icon-button-bg: #3A3A3A; 
+  --app-dark-icon-button-fg: #E0E0E0;
+  
+  --app-dark-filter-selected-bg: #FFD54F; 
+  --app-dark-filter-selected-text: #121212; 
+  --app-dark-filter-unselected-bg: #2C2C2C; 
+  --app-dark-filter-unselected-text: #BDBDBD; 
+  --app-dark-filter-unselected-border: #424242; 
+  
+  --app-dark-add-button-bg: #FFD54F; 
+  --app-dark-add-button-text: #121212;
+
+  /* Tipografía Base (Roboto) */
+  --app-font-family: 'Roboto', sans-serif;
+  
+  /* CG02 - Títulos de Sección - M3 Headline Large */
+  --app-font-size-section-title: 2rem; /* 32px */
+  --app-font-weight-section-title: 400; /* Regular */ 
+
+  --app-font-size-task-title: 16px; 
+  --app-font-weight-task-title: 500; 
+
+  /* Tipografía M3 Label Small para subtítulos de tarea */
+  --app-font-size-task-subtitle: 0.6875rem; /* 11px */
+  --app-font-weight-task-subtitle: 500; /* Medium */
+  --app-color-task-subtitle: #79747E; 
+
+  --app-font-size-description: 0.875rem; /* 14px - M3 Label Large */
+  --app-font-weight-description: 500; /* Medium - M3 Label Large */ 
+
+  --app-font-size-timer: 16px; 
+  --app-font-weight-timer: 400; 
+
+  --app-font-size-chip-filter-button: 14px; 
+  --app-font-weight-chip-filter-button: 500; 
+
+  --app-font-size-complete-button: 14px;
+  --app-font-weight-complete-button: 500; 
+
+  --app-font-size-expand-button: 14px; 
+  --app-font-weight-expand-button: 500; 
+
+  --app-font-size-empty-state-primary: 16px;
+  --app-font-weight-empty-state-primary: 400;
+  --app-font-size-empty-state-secondary: 14px;
+  --app-font-weight-empty-state-secondary: 400;
+
+  /* Espaciados y Layout */
+  --app-spacing-body-padding: 24px;
+  --app-spacing-card-padding: 16px;
+  --app-spacing-inter-task-gap: 12px;
+  --app-spacing-section-title-margin-bottom: 16px;
+  
+  --app-spacing-internal-card-primary: 8px;
+  --app-spacing-internal-card-secondary: 4px;
+  --app-spacing-internal-card-large: 12px;
+  --app-spacing-description-margin-bottom: 16px;
+
+  --app-spacing-chip-padding-y: 6px;
+  --app-spacing-chip-padding-x: 12px;
+  --app-spacing-complete-button-padding-y: 10px; 
+  --app-spacing-complete-button-padding-x: 20px; 
+  --app-spacing-add-button-padding-y: 10px;
+  --app-spacing-add-button-padding-x: 16px;
+
+  /* Radios de Borde */
+  --app-border-radius-card: 16px;
+  --app-border-radius-button-pill: 20px; 
+  --app-border-radius-chip: 8px;
+  --app-border-radius-icon-button-circular: 50%;
+}
+
+body {
+  font-family: var(--app-font-family);
+  background-color: #ffffff;
+  color: var(--app-light-on-surface);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body.dark-theme {
+  background-color: var(--app-dark-background);
+  color: var(--app-dark-on-surface);
+}
+
+.m3-section-title {
+  font-size: var(--app-font-size-section-title);
+  font-weight: var(--app-font-weight-section-title);
+  color: var(--app-light-on-surface); 
+  margin-top: var(--app-spacing-body-padding); 
+  margin-bottom: var(--app-spacing-section-title-margin-bottom);
+  padding-left: 0; 
+}
+
+.dark-theme .m3-section-title {
+  color: var(--app-dark-on-surface);
+}
+
+.m3-card-base {
+  background-color: var(--app-light-surface-container);
+  border-radius: var(--app-border-radius-card);
+  padding: var(--app-spacing-card-padding);
+  box-shadow: none;
+  border: 1px solid var(--app-light-outline);
+  margin-bottom: var(--app-spacing-inter-task-gap);
+}
+
+.dark-theme .m3-card-base {
+  background-color: var(--app-dark-surface-container);
+  border-color: var(--app-dark-outline);
+}
+
+.m3-task-item-card.mat-mdc-card {
+  background-color: var(--app-light-surface-container);
+  border-radius: var(--app-border-radius-card);
+  padding: var(--app-spacing-card-padding);
+  border: 1px solid var(--app-light-outline);
+  margin-bottom: var(--app-spacing-inter-task-gap);
+  --mdc-elevated-card-container-elevation: none !important;
+  box-shadow: none !important;
+}
+
+.dark-theme .m3-task-item-card.mat-mdc-card {
+  background-color: var(--app-dark-surface-container);
+  border-color: var(--app-dark-outline);
+}
+
+.m3-icon-button-circular {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: var(--app-border-radius-icon-button-circular);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--app-light-icon-button-bg);
+  color: var(--app-light-icon-button-fg);
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.dark-theme .m3-icon-button-circular {
+  background-color: var(--app-dark-icon-button-bg);
+  color: var(--app-dark-icon-button-fg);
+}
+
+.m3-icon-button-circular mat-icon {
+  font-size: 24px; 
+}
+
+.m3-expand-button {
+  font-size: var(--app-font-size-expand-button);
+  font-weight: var(--app-font-weight-expand-button);
+  color: var(--app-light-primary-action-text);
+  background-color: transparent;
+  border: none;
+  padding: var(--app-spacing-internal-card-secondary) 0;
+  cursor: pointer;
+  text-align: right;
+  width: 100%;
+  margin-top: var(--app-spacing-internal-card-large);
+}
+
+.dark-theme .m3-expand-button {
+  color: var(--app-dark-primary-action-text);
+}
+
+.m3-empty-state-card {
+  background-color: var(--app-light-surface-container);
+  border-radius: var(--app-border-radius-card);
+  padding: var(--app-spacing-card-padding);
+  border: 1px solid transparent; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px; 
+}
+
+.dark-theme .m3-empty-state-card {
+  background-color: var(--app-dark-surface-container);
+  border-color: var(--app-dark-outline);
+}
+
+.m3-empty-state-text-primary {
+  font-size: var(--app-font-size-empty-state-primary);
+  font-weight: var(--app-font-weight-empty-state-primary);
+  color: var(--app-light-on-surface);
+  margin-top: 0;
+  margin-bottom: var(--app-spacing-internal-card-secondary);
+}
+
+.dark-theme .m3-empty-state-text-primary {
+  color: var(--app-dark-on-surface);
+}
+
+.m3-empty-state-text-secondary {
+  font-size: var(--app-font-size-empty-state-secondary);
+  font-weight: var(--app-font-weight-empty-state-secondary);
+  color: var(--app-light-on-surface-variant);
+  margin-bottom: var(--app-spacing-internal-card-large);
+}
+
+.dark-theme .m3-empty-state-text-secondary {
+  color: var(--app-dark-on-surface-variant);
+}
+
+.m3-button-add-task-empty-state {
+  background-color: var(--app-light-add-button-bg);
+  color: var(--app-light-add-button-text);
+  border-radius: var(--app-border-radius-button-pill);
+  padding: var(--app-spacing-add-button-padding-y) var(--app-spacing-add-button-padding-x);
+  font-size: var(--app-font-size-complete-button); 
+  font-weight: var(--app-font-weight-complete-button);
+  line-height: 1.5;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dark-theme .m3-button-add-task-empty-state {
+  background-color: var(--app-dark-add-button-bg);
+  color: var(--app-dark-add-button-text);
+}
+
+.m3-button-add-task-empty-state mat-icon {
+  margin-right: var(--app-spacing-internal-card-primary);
+  font-size: 20px;
+}
+
+.m3-priority-tonal-button {
+  background-color: var(--app-light-chip-priority-bg);
+  color: var(--app-light-chip-priority-text);
+  padding: 10px 16px; 
+  border-radius: var(--app-border-radius-button-pill); 
+  border: none;
+  font-family: var(--app-font-family);
+  font-size: var(--app-font-size-chip-filter-button); 
+  font-weight: var(--app-font-weight-chip-filter-button);
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5;
+  opacity: 1; 
+  box-shadow: none; 
+}
+
+.dark-theme .m3-priority-tonal-button {
+  background-color: var(--app-dark-chip-priority-bg);
+  color: var(--app-dark-chip-priority-text);
+}
+
+.m3-icon-tonal-button {
+  background-color: var(--app-light-icon-button-bg); 
+  color: var(--app-light-icon-button-fg); 
+  width: 40px; 
+  height: 40px;
+  padding: 8px; 
+  border-radius: var(--app-border-radius-icon-button-circular); 
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 1;
+  box-shadow: none;
+}
+
+.m3-icon-tonal-button mat-icon {
+  font-size: 24px; 
+}
+
+.dark-theme .m3-icon-tonal-button {
+  background-color: var(--app-dark-icon-button-bg);
+  color: var(--app-dark-icon-button-fg);
+}
+
+/* === Cambios Solicitados (11 Mayo 2025) - Iteración 1 === */
+
+.m3-timer-text-v6 { 
+  font-size: 1.75rem; 
+  font-weight: 400; 
+  line-height: 2.25rem; 
+  letter-spacing: 0px;
+  color: #636309 !important;
+}
+
+.m3-timer-icon-v6.mat-icon {
+  color: #636309 !important;
+  line-height: 24px !important; /* CAMBIO SOLICITADO */
+}
+
+.task-form-sidenav-header.mat-toolbar {
+  background-color: #e3e0d2 !important;
+}
+
+.task-form-sidenav-content {
+  padding: 20px !important;
+}
+
+.m3-button-accept,
+button[mat-raised-button][color="primary"],
+button[mat-flat-button][color="primary"] 
+{
+  background-color: #7b965d !important;
+  color: #FFFFFF !important; 
+}
+
+.m3-button-cancel,
+button[mat-stroked-button].m3-button-cancel,
+.task-form-sidenav-actions button[mat-stroked-button] 
+{
+  border: 1px solid #918c63 !important; 
+  color: #918c63 !important;
+  background-color: transparent;
+}
+
+.sidenav-form-actions {
+  display: flex;
+  justify-content: flex-end; 
+  gap: 8px; 
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.m3-advanced-options-toggle,
+.m3-advanced-options-toggle mat-icon {
+  color: #5f7843 !important;
+}
+
+mat-dialog-actions {
+  display: flex !important;
+  flex-direction: row !important; 
+  justify-content: flex-end !important; 
+  gap: 8px !important; 
+  padding: 16px 24px !important; 
+}
+
+mat-dialog-actions .m3-button-accept,
+mat-dialog-actions button[mat-raised-button][color="primary"],
+mat-dialog-actions button[mat-flat-button][color="primary"] {
+  background-color: #7b965d !important;
+  color: #FFFFFF !important;
+}
+
+mat-dialog-actions .m3-button-cancel,
+mat-dialog-actions button[mat-stroked-button].m3-button-cancel {
+  border: 1px solid #918c63 !important;
+  color: #918c63 !important;
+  background-color: transparent;
+}
+
+mat-dialog-actions button {
+  margin-left: 8px; 
+}
+mat-dialog-actions button:first-child {
+  margin-left: 0;
+}
+
+/* === Cambios Solicitados (11 Mayo 2025) - Iteración 2 === */
+
+.m3-previous-active-marker {
+  background-color: #ffe79d !important;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #1c1b1f; 
+}
+
+.m3-previous-active-marker mat-icon {
+    color: #1c1b1f !important; 
+}
+
+.m3-button-complete-v6 {
+    color: var(--app-light-complete-button-text) !important; 
+    background-color: var(--app-light-complete-button-bg) !important;
+}
+
+button[mat-fab] {
+  background-color: var(--app-light-add-button-bg) !important;
+  color: var(--app-light-add-button-text) !important;
+}
+
+button[mat-fab] mat-icon {
+  color: var(--app-light-add-button-text) !important; 
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: #f2f1ea !important;
+}
+
+/* === Cambios Solicitados (11 Mayo 2025) - Iteración 3 (Móvil y Título) === */
+
+.m3-task-title,
+.m3-task-title-v6 { /* Aplicar a ambas clases por si acaso */
+  white-space: normal !important; 
+  word-break: break-word; 
+}
+
+@media (max-width: 767px) {
+  .content-area {
+    width: auto !important; 
+    padding-left: var(--app-spacing-body-padding) !important; 
+    padding-right: var(--app-spacing-body-padding) !important; 
+  }
+
+  .m3-card-base.m3-active-task-card {
+    width: auto !important; 
+    margin-left: 0px !important; 
+     margin-right: 0px !important;
+  }
+
+  .m3-empty-state-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+/* === Cambios Solicitados (11 Mayo 2025) - Iteración 4 === */
+
+.mat-drawer-inner-container {
+  background-color: #e3e0d2 !important;
+}
+
+.task-form-sidenav-actions {
+  display: flex !important; /* Asegurar display flex */
+  justify-content: space-between !important; /* Distribuir espacio */
+  align-items: center; /* Centrar verticalmente los elementos */
+  width: 100%; /* Ocupar todo el ancho disponible */
+}
+
+.advanced-options {
+  margin-top: 0px !important;
+  margin-bottom: 24px !important;
+  color: #7b965d !important;
+  /* Asegurar que el icono dentro también herede el color si es necesario */
+}
+
+.advanced-options mat-icon {
+    color: #7b965d !important;
+}
+
+.advanced-options span { /* Si el texto está en un span */
+    color: #7b965d !important;
+}
+
+
+.success-snackbar {
+  background-color: #8BC34A !important;
+  color: white !important;
+}
+
+.info-snackbar {
+  background-color: #636309 !important;
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: transparent;
+  --mat-mdc-snack-bar-button-color: #fff;
+  --mdc-snackbar-supporting-text-color: #fff;
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  border-radius: 16px !important;
+  padding: 8px 16px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* === Correcciones solicitadas (20 Mayo 2025) === */
+/* Padding para desktop exactamente como solicitado por el usuario */
+.main-content-with-rail {
+  padding-left: 72px;
+}
+
+/* Estilos para tarjetas completadas */
+.habit-item-card.completed {
+  order: 10; /* Las tarjetas completadas aparecerán al final */
+}

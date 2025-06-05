@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="es" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="activeTask.currentlyPerforming" datatype="html">
+        <source>Se está realizando la tarea:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/active-task-display/active-task-display.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+        <note priority="1" from="description">Label for active task display</note>
+      </trans-unit>
+      <trans-unit id="activeTask.elapsedTimeAriaLabel" datatype="html">
+        <source>Tiempo transcurrido</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/active-task-display/active-task-display.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for elapsed time</note>
+      </trans-unit>
+      <trans-unit id="activeTask.completeTaskAriaLabel" datatype="html">
+        <source>Marcar tarea como terminada</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/active-task-display/active-task-display.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for complete task button</note>
+      </trans-unit>
+      <trans-unit id="activeTask.completeTaskButton" datatype="html">
+        <source>¡La he terminado!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/active-task-display/active-task-display.component.html</context>
+          <context context-type="linenumber">11,16</context>
+        </context-group>
+        <note priority="1" from="description">Button text to complete a task</note>
+      </trans-unit>
+      <trans-unit id="activeTask.noActiveTaskMessage" datatype="html">
+        <source>No hay ninguna tarea activa en este momento.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/active-task-display/active-task-display.component.html</context>
+          <context context-type="linenumber">17,21</context>
+        </context-group>
+        <note priority="1" from="description">Message displayed when no task is active</note>
+      </trans-unit>
+      <trans-unit id="historyView.title" datatype="html">
+        <source>Tu Historia de Tareas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/history-view/history-view.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+        <note priority="1" from="description">Title for the task history view</note>
+      </trans-unit>
+      <trans-unit id="historyView.clearHistoryButton" datatype="html">
+        <source>Borrar Historial</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/history-view/history-view.component.html</context>
+          <context context-type="linenumber">6,10</context>
+        </context-group>
+        <note priority="1" from="description">Button text to clear history</note>
+      </trans-unit>
+      <trans-unit id="historyView.noHistoryMessage1" datatype="html">
+        <source>Aún no hay nada en tu historial.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/history-view/history-view.component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <note priority="1" from="description">Message when history is empty</note>
+      </trans-unit>
+      <trans-unit id="historyView.noHistoryMessage2" datatype="html">
+        <source>Completa algunas tareas para verlo aquí.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/history-view/history-view.component.html</context>
+          <context context-type="linenumber">30,34</context>
+        </context-group>
+        <note priority="1" from="description">Suggestion when history is empty</note>
+      </trans-unit>
+      <trans-unit id="mainLayout.myTasksButton" datatype="html">
+        <source>Mis Tareas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description">Button to show task list</note>
+      </trans-unit>
+      <trans-unit id="mainLayout.myHistoryButton" datatype="html">
+        <source>Mi Historia</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">10,12</context>
+        </context-group>
+        <note priority="1" from="description">Button to show history view</note>
+      </trans-unit>
+      <trans-unit id="mainLayout.addTaskAriaLabel" datatype="html">
+        <source>Añadir nueva tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/main-layout/main-layout.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for add new task button</note>
+      </trans-unit>
+      <trans-unit id="taskForm.editTaskTitle" datatype="html">
+        <source>Editar Tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+        <note priority="1" from="description">Dialog title for editing a task</note>
+      </trans-unit>
+      <trans-unit id="taskForm.addTaskTitle" datatype="html">
+        <source>Añadir Nueva Tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">4,8</context>
+        </context-group>
+        <note priority="1" from="description">Dialog title for adding a new task</note>
+      </trans-unit>
+      <trans-unit id="taskForm.taskTitleLabel" datatype="html">
+        <source>Título de la tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description">Label for task title input</note>
+      </trans-unit>
+      <trans-unit id="taskForm.titleRequiredError" datatype="html">
+        <source> El título es obligatorio. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">12,16</context>
+        </context-group>
+        <note priority="1" from="description">Error message when task title is missing</note>
+      </trans-unit>
+      <trans-unit id="taskForm.priorityLabel" datatype="html">
+        <source>Prioridad</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">17,19</context>
+        </context-group>
+        <note priority="1" from="description">Label for task priority selector</note>
+      </trans-unit>
+      <trans-unit id="taskForm.advancedOptionsButton" datatype="html">
+        <source>Opciones avanzadas</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+        <note priority="1" from="description">Button text to toggle advanced options</note>
+      </trans-unit>
+      <trans-unit id="taskForm.descriptionLabel" datatype="html">
+        <source>Descripción (opcional)</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <note priority="1" from="description">Label for task description input</note>
+      </trans-unit>
+      <trans-unit id="taskForm.cancelButton" datatype="html">
+        <source>Cancelar</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+        <note priority="1" from="description">Button text to cancel an action</note>
+      </trans-unit>
+      <trans-unit id="taskForm.saveChangesButton" datatype="html">
+        <source>Guardar Cambios</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+        <note priority="1" from="description">Button text to save changes when editing</note>
+      </trans-unit>
+      <trans-unit id="taskForm.addTaskButton" datatype="html">
+        <source>Añadir Tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-form/task-form.component.html</context>
+          <context context-type="linenumber">45,49</context>
+        </context-group>
+        <note priority="1" from="description">Button text to add a new task</note>
+      </trans-unit>
+      <trans-unit id="taskItem.activateTaskAriaLabel" datatype="html">
+        <source>Activar tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for activate task button</note>
+      </trans-unit>
+      <trans-unit id="taskItem.toggleDetailsAriaLabel" datatype="html">
+        <source>Mostrar/ocultar detalles</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for toggle details button</note>
+      </trans-unit>
+      <trans-unit id="taskItem.createdSinceLabel" datatype="html">
+        <source>Creada hace:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <note priority="1" from="description">Label for task creation time</note>
+      </trans-unit>
+      <trans-unit id="taskItem.totalTimeActiveLabel" datatype="html">
+        <source>Tiempo total activo:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">21,23</context>
+        </context-group>
+        <note priority="1" from="description">Label for total time active</note>
+      </trans-unit>
+      <trans-unit id="taskItem.previouslyActiveNote" datatype="html">
+        <source> Antes estabas con esta tarea. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">24,28</context>
+        </context-group>
+        <note priority="1" from="description">Note for previously active task</note>
+      </trans-unit>
+      <trans-unit id="taskItem.moreOptionsAriaLabel" datatype="html">
+        <source>Más opciones</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for more options menu</note>
+      </trans-unit>
+      <trans-unit id="taskItem.editTitleDescriptionMenu" datatype="html">
+        <source>Editar Título/Descripción</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">35,37</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to edit title/description</note>
+      </trans-unit>
+      <trans-unit id="taskItem.changePriorityMenu" datatype="html">
+        <source>Cambiar Prioridad</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">39,41</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to change priority</note>
+      </trans-unit>
+      <trans-unit id="taskItem.deleteTaskMenu" datatype="html">
+        <source>Eliminar Tarea</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">43,47</context>
+        </context-group>
+        <note priority="1" from="description">Menu item to delete task</note>
+      </trans-unit>
+      <trans-unit id="taskItem.priorityUrgent" datatype="html">
+        <source>Urgente</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">48,49</context>
+        </context-group>
+        <note priority="1" from="description">Priority option: Urgent</note>
+      </trans-unit>
+      <trans-unit id="taskItem.priorityHigh" datatype="html">
+        <source>Alta</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+        <note priority="1" from="description">Priority option: High</note>
+      </trans-unit>
+      <trans-unit id="taskItem.priorityNormal" datatype="html">
+        <source>Normal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">50,51</context>
+        </context-group>
+        <note priority="1" from="description">Priority option: Normal</note>
+      </trans-unit>
+      <trans-unit id="taskItem.priorityLow" datatype="html">
+        <source>Baja</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-item/task-item.component.html</context>
+          <context context-type="linenumber">51,54</context>
+        </context-group>
+        <note priority="1" from="description">Priority option: Low</note>
+      </trans-unit>
+      <trans-unit id="taskList.sortByLabel" datatype="html">
+        <source>Ordenar por:</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+        <note priority="1" from="description">Label for sort by options</note>
+      </trans-unit>
+      <trans-unit id="taskList.sortByAntiquityAriaLabel" datatype="html">
+        <source>Ordenar por antigüedad</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for sort by antiquity button</note>
+      </trans-unit>
+      <trans-unit id="taskList.sortByAntiquityButton" datatype="html">
+        <source>Antigüedad</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">6,8</context>
+        </context-group>
+        <note priority="1" from="description">Sort by antiquity button text</note>
+      </trans-unit>
+      <trans-unit id="taskList.sortByPriorityAriaLabel" datatype="html">
+        <source>Ordenar por prioridad</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+        <note priority="1" from="description">ARIA label for sort by priority button</note>
+      </trans-unit>
+      <trans-unit id="taskList.sortByPriorityButton" datatype="html">
+        <source>Prioridad</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">9,12</context>
+        </context-group>
+        <note priority="1" from="description">Sort by priority button text</note>
+      </trans-unit>
+      <trans-unit id="taskList.noTasksMessage1" datatype="html">
+        <source>¡Todo listo por aquí!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">24,25</context>
+        </context-group>
+        <note priority="1" from="description">Message when no tasks are present</note>
+      </trans-unit>
+      <trans-unit id="taskList.noTasksMessage2" datatype="html">
+        <source>Añade una nueva tarea para empezar.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/task-list/task-list.component.html</context>
+          <context context-type="linenumber">25,29</context>
+        </context-group>
+        <note priority="1" from="description">Suggestion to add a new task when list is empty</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

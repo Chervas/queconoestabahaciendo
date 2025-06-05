@@ -1,0 +1,221 @@
+.habit-item-card {
+  background-color: #FBF9EF;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  order: 0; /* Por defecto, los hábitos no completados aparecen primero */
+  /* CORRECCIÓN V27: Volver al diseño anterior de tarjetas */
+  width: auto;
+  min-width: auto;
+  max-width: none;
+}
+
+.habit-item-card.completed {
+  background-color: #f0f7e6;
+  order: 1; /* Los hábitos completados aparecen al final */
+}
+
+.habit-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.habit-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  order: 1;
+  flex: 1; /* Permitir que el título ocupe el espacio disponible */
+}
+
+.habit-actions {
+  display: flex;
+}
+
+.habit-action-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.habit-action-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.habit-progress {
+  margin-bottom: 12px;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+.progress-status {
+  color: #555;
+  font-weight: 500;
+}
+
+.progress-target {
+  color: #777;
+  font-weight: 500;
+}
+
+.progress-bar-container {
+  height: 4px;
+  background-color: #e0e0e0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 8px;
+  width: 100%; /* Asegurar que ocupe todo el ancho */
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #8bc34a;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.habit-matrix {
+  margin-bottom: 12px;
+  margin-top: 16px;
+  /* CORRECCIÓN V27: Mantener overflow hidden para evitar desbordamiento */
+  width: 100%;
+  overflow: hidden;
+}
+
+.habit-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.habit-status {
+  font-size: 14px;
+  color: #777;
+  font-weight: 500;
+}
+
+.habit-status.completed {
+  color: #4caf50;
+}
+
+.habit-action-main {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.habit-action-main:hover {
+  background-color: #e0e0e0;
+  transform: scale(1.05);
+}
+
+.habit-action-main.increment {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+
+.habit-action-main.increment:hover {
+  background-color: #c8e6c9;
+}
+
+.habit-action-main.completed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.habit-action-main:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+.quit-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quit-counter-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #4caf50;
+}
+
+.quit-counter-label {
+  font-size: 12px;
+  color: #777;
+}
+
+/* Estilos para el modo oscuro */
+:host-context(.dark-theme) .habit-item-card {
+  background-color: #2d2d2d;
+}
+
+:host-context(.dark-theme) .habit-item-card.completed {
+  background-color: #2d3d2d;
+}
+
+:host-context(.dark-theme) .habit-action-button,
+:host-context(.dark-theme) .progress-status,
+:host-context(.dark-theme) .progress-target,
+:host-context(.dark-theme) .habit-status,
+:host-context(.dark-theme) .quit-counter-value,
+:host-context(.dark-theme) .quit-counter-label {
+  color: #69F0AE;
+}
+
+:host-context(.dark-theme) .progress-bar-container {
+  background-color: rgba(105, 240, 174, 0.1);
+}
+
+:host-context(.dark-theme) .progress-bar {
+  background-color: #69F0AE;
+}
+
+:host-context(.dark-theme) .habit-action-main {
+  background-color: #1e3e2f;
+  color: #69F0AE;
+}
+
+:host-context(.dark-theme) .habit-action-main:hover {
+  background-color: #2a4a3a;
+}
+
+:host-context(.dark-theme) .habit-action-main.completed {
+  background-color: #00C853;
+  color: #121212;
+}
+
+/* CORRECCIÓN V27: Simplificar media queries para volver al diseño anterior */
+@media (max-width: 480px) {
+  .habit-item-card {
+    padding: 12px;
+  }
+}

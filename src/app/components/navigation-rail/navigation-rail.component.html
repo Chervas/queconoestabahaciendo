@@ -1,0 +1,22 @@
+<div class="navigation-rail" [class.mobile]="isMobile" [class.expanded]="isExpanded" [class.work-phase]="currentPhase === 'work'" [class.recreation-phase]="currentPhase === 'recreation'">
+  <!-- Botón de menú/expandir (solo visible en desktop) -->
+  <button *ngIf="!isMobile" mat-icon-button class="menu-toggle" (click)="toggleExpand()" [matTooltip]="isExpanded ? 'Contraer menú' : 'Expandir menú'">
+    <mat-icon>{{ isExpanded ? 'menu_open' : 'menu' }}</mat-icon>
+  </button>
+  
+  <!-- Contenedor de elementos de navegación -->
+  <div class="nav-items-container">
+    <div *ngFor="let section of sections" 
+         class="nav-item" 
+         [class.active]="isActive(section)"
+         (click)="selectSection(section)"
+         matRipple
+         [matTooltip]="!isExpanded && !isMobile ? section.label : ''">
+      
+      <mat-icon class="nav-icon">{{ section.icon }}</mat-icon>
+      
+      <!-- Etiqueta (siempre visible, siguiendo el estándar Material 3) -->
+      <span class="nav-label">{{ section.label }}</span>
+    </div>
+  </div>
+</div>

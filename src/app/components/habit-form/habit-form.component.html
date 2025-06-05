@@ -1,0 +1,88 @@
+<div class="habit-form-container">
+  <div class="form-header">
+    <h2 class="form-title">{{ formTitle }}</h2>
+    <button mat-icon-button (click)="onCancel()" aria-label="Cerrar">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <form [formGroup]="habitForm" (ngSubmit)="onSubmit()" class="habit-form">
+    <!-- Nombre del hábito -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre del hábito</mat-label>
+      <input matInput formControlName="name" maxlength="21" placeholder="Ej. Beber agua">
+      <mat-hint align="end">{{ habitForm.get('name')?.value?.length || 0 }}/21</mat-hint>
+      <mat-error *ngIf="habitForm.get('name')?.hasError('required')">
+        El nombre es obligatorio
+      </mat-error>
+      <mat-error *ngIf="habitForm.get('name')?.hasError('maxlength')">
+        El nombre no puede exceder los 21 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Tipo de hábito (solo para creación) -->
+    <div class="form-section" *ngIf="!isEditMode">
+      <label class="section-label">Tipo de hábito</label>
+      <mat-radio-group formControlName="type" class="type-radio-group">
+        <mat-radio-button *ngFor="let type of habitTypes" [value]="type">
+          {{ typeLabels[type] }}
+          <span class="type-description">
+            {{ type === 'counter' ? 'Ej, ir al gimnasio' : 'Ej, dejar de fumar' }}
+          </span>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Campos específicos para tipo COUNTER -->
+    <ng-container *ngIf="isCounterType">
+      <!-- Frecuencia -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Frecuencia</mat-label>
+        <mat-select formControlName="frequency">
+          <mat-option *ngFor="let freq of habitFrequencies" [value]="freq">
+            {{ frequencyLabels[freq] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- Establecer meta -->
+      <div class="form-section">
+        <mat-slide-toggle formControlName="hasTarget" color="primary">
+          ¿Establecer una meta?
+        </mat-slide-toggle>
+      </div>
+
+      <!-- Número de veces (solo si hasTarget es true) -->
+      <mat-form-field appearance="outline" class="full-width" *ngIf="hasTargetEnabled">
+        <mat-label>Número de veces</mat-label>
+        <input matInput type="number" formControlName="targetCount" min="1">
+        <mat-hint>Número de veces que debe repetirse este hábito para considerarse terminado</mat-hint>
+        <mat-error *ngIf="habitForm.get('targetCount')?.hasError('required')">
+          Este campo es obligatorio
+        </mat-error>
+        <mat-error *ngIf="habitForm.get('targetCount')?.hasError('min')">
+          El valor debe ser al menos 1
+        </mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <!-- Fecha de inicio (solo para tipo QUIT) -->
+    <ng-container *ngIf="!isCounterType">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Fecha de inicio</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint>Fecha desde la que empezaste a dejar este hábito</mat-hint>
+      </mat-form-field>
+    </ng-container>
+
+    <!-- Botones de acción -->
+    <div class="form-actions">
+      <button mat-button type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="habitForm.invalid">
+        {{ submitButtonText }}
+      </button>
+    </div>
+  </form>
+</div>

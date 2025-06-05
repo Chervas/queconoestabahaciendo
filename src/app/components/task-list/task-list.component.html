@@ -1,0 +1,41 @@
+<div class="m3-task-list-container">
+  <h3 class="m3-section-title">Tareas pendientes</h3>
+  <div class="m3-list-controls" *ngIf="tasksToDisplay.length > 0 || isLoading">
+    <mat-button-toggle-group #sortGroup="matButtonToggleGroup" [(value)]="currentSort" (change)="onSortChange($event)" class="m3-filter-segmented-button-group" aria-label="Ordenar por">
+      <mat-button-toggle value="priority" class="m3-filter-segmented-button">
+        <span>Prioridad</span>
+      </mat-button-toggle>
+      <mat-button-toggle value="creationDate" class="m3-filter-segmented-button">
+        <span>Creación</span>
+      </mat-button-toggle>
+      <!-- Requisito V5-014: Cambiado "Nombre" por "Actividad" -->
+      <mat-button-toggle value="activity" class="m3-filter-segmented-button">
+        <span>Actividad</span>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <div *ngIf="tasksToDisplay.length === 0 && !isLoading" class="m3-empty-state-card m3-pending-tasks-empty-state">
+    <div class="m3-empty-state-content">
+      <p class="m3-empty-state-text-primary">No hay tareas pendientes</p>
+      <button mat-flat-button class="m3-button-add-task-empty-state" (click)="openCreateTaskDialog()">
+        <mat-icon>add</mat-icon>
+        <span>Crear tarea</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="m3-loading-state">
+    <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
+    <p class="m3-loading-text">Cargando tareas...</p>
+  </div>
+
+  <div class="m3-tasks-scroll-container" *ngIf="!isLoading && tasksToDisplay.length > 0">
+    <app-task-item *ngFor="let task of tasksToDisplay; trackBy: trackById" 
+                   [task]="task"
+                   (edit)="editTask($event)">
+    </app-task-item>
+  </div>
+
+</div>
+

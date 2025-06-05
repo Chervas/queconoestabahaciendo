@@ -1,0 +1,80 @@
+<!-- Estructura HTML de la tarjeta activa reestructurada con dos secciones -->
+<div class="m3-card-base m3-active-task-card" *ngIf="activeTask">
+  <!-- Sección superior con padding -->
+  <div class="m3-card-top-section">
+    <div class="m3-active-task-card-main-content-wrapper">
+      <!-- Encabezado de la tarjeta -->
+      <div class="m3-card-header-v6">
+        <div class="m3-header-start-v6">
+          <button mat-icon-button class="mat-mdc-menu-trigger m3-icon-button-menu-v6" [matMenuTriggerFor]="taskMenu" aria-label="Opciones de tarea activa">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #taskMenu="matMenu">
+            <button mat-menu-item (click)="openEditTaskDialog()">
+              <mat-icon>edit</mat-icon>
+              <span>Editar Tarea</span>
+            </button>
+            <button mat-menu-item (click)="onDeleteTask()">
+              <mat-icon>delete</mat-icon>
+              <span>Eliminar Tarea</span>
+            </button>
+          </mat-menu>
+          <div class="m3-title-group-v6">
+            <h2 class="m3-task-title-v6">{{ activeTask?.title || 'Sin título' }}</h2>
+            <span class="m3-task-subtitle-v6" *ngIf="activeTask?.createdAt">Hace {{ activeTask?.createdAt | timeAgo }}</span>
+          </div>
+        </div>
+        <div class="m3-header-end-v6">
+          <div class="m3-timer-group-v6" [class.blinking-timer]="isTaskPaused">
+            <mat-icon class="m3-timer-icon-v6">schedule</mat-icon>
+            <span class="m3-timer-text-v6">{{ displayElapsedTime | formatTime }}</span>
+          </div>
+          <button mat-flat-button class="m3-priority-tonal-button" [ngStyle]="getPriorityButtonStyles(activeTask?.priority)" [matMenuTriggerFor]="priorityMenu" *ngIf="activeTask?.priority">
+            <span>{{ activeTask?.priority | priorityTranslate }}</span>
+            <mat-icon>arrow_drop_down</mat-icon>
+          </button>
+          <mat-menu #priorityMenu="matMenu">
+            <button mat-menu-item (click)="changePriority(TaskPriority.URGENT)">{{ TaskPriority.URGENT | priorityTranslate }}</button>
+            <button mat-menu-item (click)="changePriority(TaskPriority.HIGH)">{{ TaskPriority.HIGH | priorityTranslate }}</button>
+            <button mat-menu-item (click)="changePriority(TaskPriority.NORMAL)">{{ TaskPriority.NORMAL | priorityTranslate }}</button>
+            <button mat-menu-item (click)="changePriority(TaskPriority.LOW)">{{ TaskPriority.LOW | priorityTranslate }}</button>
+          </mat-menu>
+          <button mat-icon-button class="m3-icon-tonal-button" (click)="onPlayPause()" aria-label="Continuar tarea / Pausar tarea">
+            <mat-icon>{{ isTaskPaused || !isPlaying ? 'play_arrow' : 'pause' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- Área de contenido de la tarjeta -->
+      <div class="m3-card-content-area-v6">
+        <div class="m3-task-description-container-v6" *ngIf="activeTask?.description">
+          <p class="m3-task-description-v6" #taskDescriptionEl 
+             [class.m3-task-description-truncated-v6]="!descriptionExpanded && activeTask && activeTask.description && activeTask.description.length > 150">
+            {{ activeTask?.description }}
+          </p>
+        </div>
+        <div class="m3-button-complete-container-v6">
+          <button mat-flat-button class="m3-button-complete-v6" (click)="onComplete()">
+            <mat-icon>check</mat-icon>
+            <span>Completar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección inferior para el divisor y el botón expandir (sin padding horizontal general) -->
+  <div class="m3-card-bottom-section" *ngIf="activeTask && activeTask.description && activeTask.description.length > 150">
+    <div class="m3-footer-divider-v6"></div>
+    <button class="m3-expand-button-v6" (click)="toggleDescription()">
+      {{ descriptionExpanded ? 'Colapsar' : 'Expandir' }}
+    </button>
+  </div>
+</div>
+
+<!-- Estado vacío si no hay tarea activa -->
+<div *ngIf="!activeTask" class="empty-state-card">
+  <p class="empty-state-text-primary">No hay tareas activas en este momento</p>
+  <p class="empty-state-text-secondary">selecciona una tarea pendiente</p>
+</div>
+

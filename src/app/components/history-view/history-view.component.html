@@ -1,0 +1,44 @@
+<div class="history-view-container">
+  <mat-toolbar color="background" class="history-toolbar">
+    <button mat-icon-button (click)="goBack()" aria-label="Volver a la vista principal">
+      <mat-icon>arrow_back_outlined</mat-icon>
+    </button>
+    <span class="history-title">Historial de Actividades</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button (click)="clearAllHistory()" aria-label="Limpiar todo el historial" *ngIf="displayedHistoryEntries.length > 0">
+      <mat-icon>delete_sweep_outlined</mat-icon> 
+    </button>
+  </mat-toolbar>
+
+  <div class="history-content">
+    <div *ngIf="isLoading" class="loading-spinner-container">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Cargando historial...</p>
+    </div>
+
+    <div *ngIf="!isLoading && displayedHistoryEntries.length === 0" class="empty-history-message">
+      <mat-icon class="message-icon">history_edu_outlined</mat-icon>
+      <p>Aún no hay actividad registrada.</p>
+      <p>¡Las tareas y hábitos completados aparecerán aquí!</p>
+    </div>
+
+    <div *ngIf="!isLoading && displayedHistoryEntries.length > 0" class="history-list">
+      <mat-card *ngFor="let entry of displayedHistoryEntries; trackBy: trackById" class="history-item-card">
+        <mat-card-header>
+          <div mat-card-avatar class="history-item-avatar">
+            <mat-icon>{{ getIconForEntryType(entry.type) }}</mat-icon>
+          </div>
+          <mat-card-title>{{ entry.title }}</mat-card-title>
+          <mat-card-subtitle>
+            {{ getTypeLabel(entry.type) }} - {{ entry.timestamp | date:
+            "mediumDate" }} a las {{ entry.timestamp | date: "shortTime" }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p *ngIf="entry.description">{{ entry.description }}</p>
+          <p *ngIf="entry.metadata && entry.metadata.additionalInfo">{{ entry.metadata.additionalInfo }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

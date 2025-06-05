@@ -1,0 +1,68 @@
+.task-form-dialog {
+  /* Using Angular Material Dialog theming is preferred over direct styling here */
+  /* Styles for elements within the dialog if needed beyond Material components */
+}
+
+.full-width {
+  width: 100%;
+}
+
+.advanced-options {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.advanced-toggle-button {
+  text-transform: none; /* Keep case as is */
+  font-weight: 400;
+  color: var(--app-primary-color, #A5D6A7);
+  padding-left: 0;
+}
+
+.dark-theme .advanced-toggle-button {
+  color: var(--app-dark-primary-color, #A5D6A7);
+}
+
+.advanced-toggle-button mat-icon {
+  margin-left: 4px;
+}
+
+.advanced-content {
+  padding-top: 8px;
+}
+
+/* Styling for priority icons in select */
+.priority-icon-urgente { color: #D32F2F; }
+.priority-icon-alta { color: #FFA000; }
+.priority-icon-media { color: #388E3C; }
+.priority-icon-baja { color: #616161; }
+
+.dark-theme .priority-icon-urgente { color: #E57373; }
+.dark-theme .priority-icon-alta { color: #FFB74D; }
+.dark-theme .priority-icon-media { color: #81C784; }
+.dark-theme .priority-icon-baja { color: #90A4AE; }
+
+/* Ensure mat-dialog-actions buttons have enough space */
+.mat-dialog-actions {
+    padding-top: 16px !important; /* Add more space above actions if needed */
+}
+
+.mat-dialog-actions button mat-icon {
+    margin-right: 4px; /* Space between icon and text in button */
+}
+
+
+
+
+/* Styles for task form sidenav header to align close button to the right */
+.task-form-sidenav-header {
+  display: flex;
+  justify-content: space-between; /* Pushes title to left and button to right */
+  align-items: center; /* Vertically align items */
+  width: 100%;
+}
+
+.toolbar-spacer {
+  flex-grow: 1; /* Ensures the spacer takes up all available space */
+}
+

@@ -1,0 +1,176 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "queconoestabahaciendo": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "i18n": {
+        "sourceLocale": {
+          "code": "es",
+          "baseHref": ""
+        },
+        "locales": {
+          "ca": {
+            "translation": "src/locale/messages.ca.xlf",
+            "baseHref": "ca/"
+          },
+          "gl": {
+            "translation": "src/locale/messages.gl.xlf",
+            "baseHref": "gl/"
+          },
+          "eu": {
+            "translation": "src/locale/messages.eu.xlf",
+            "baseHref": "eu/"
+          }
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/queconoestabahaciendo",
+            "index": "src/index.html",
+            "browser": "src/main.ts",
+            "baseHref": "./",
+            "polyfills": [
+              "zone.js",
+              "@angular/localize/init"
+            ],
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              },
+              "src/assets",
+              {
+                "glob": "favicon.ico",
+                "input": "src/assets/icons",
+                "output": "/"
+              },
+              {
+                "glob": "*.png",
+                "input": "src/assets/icons",
+                "output": "/assets/icons"
+              },
+              {
+                "glob": "manifest.json",
+                "input": "src/assets/icons",
+                "output": "/"
+              },
+              {
+                "glob": "browserconfig.xml",
+                "input": "src/assets/icons",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "src/custom-theme.scss",
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "localize": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "12kB"
+                }
+              ],
+              "outputHashing": "all",
+              "localize": true
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "localize": true
+            },
+            "es": {
+              "localize": ["es"]
+            },
+            "ca": {
+              "localize": ["ca"]
+            },
+            "gl": {
+              "localize": ["gl"]
+            },
+            "eu": {
+              "localize": ["eu"]
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "queconoestabahaciendo:build:production"
+            },
+            "development": {
+              "buildTarget": "queconoestabahaciendo:build:development"
+            },
+            "es": {
+              "buildTarget": "queconoestabahaciendo:build:development,es"
+            },
+            "ca": {
+              "buildTarget": "queconoestabahaciendo:build:development,ca"
+            },
+            "gl": {
+              "buildTarget": "queconoestabahaciendo:build:development,gl"
+            },
+            "eu": {
+              "buildTarget": "queconoestabahaciendo:build:development,eu"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "outputPath": "src/locale",
+            "format": "xlf"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing",
+              "@angular/localize/init"
+            ],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}
+

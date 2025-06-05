@@ -1,0 +1,12 @@
+.confirmation-dialog-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+mat-dialog-actions {
+    margin-top: 20px;
+}
+
+/* Add any specific styles for your confirmation dialog here */
+

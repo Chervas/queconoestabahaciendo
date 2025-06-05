@@ -1,0 +1,52 @@
+<div class="task-form-sidenav-container">
+  <mat-toolbar color="primary" class="task-form-sidenav-header">
+    <span class="toolbar-title">{{ formTitle }}</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-icon-button (click)="onCancel()" aria-label="Cerrar formulario de tarea">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+
+  <div class="task-form-sidenav-content">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Título de la tarea</mat-label>
+        <input matInput formControlName="title" placeholder="Ej: Preparar facturas" required>
+        <mat-error *ngIf="taskForm.get('title')?.hasError('required')">El título es obligatorio</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Prioridad</mat-label>
+        <mat-select formControlName="priority" required>
+          <mat-option *ngFor="let priority of priorities" [value]="priority.value">
+            <mat-icon [ngClass]="getPriorityClass(priority.value)">{{ getPriorityIcon(priority.value) }}</mat-icon> 
+            {{ priority.viewValue }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="taskForm.get('priority')?.hasError('required')">La prioridad es obligatoria</mat-error>
+      </mat-form-field>
+
+      <div class="advanced-options">
+        <button type="button" mat-button (click)="toggleAdvancedOptions()" class="advanced-toggle-button">
+          {{ showAdvancedOptions ? 'Ocultar opciones avanzadas' : 'Mostrar opciones avanzadas' }}
+          <mat-icon>{{ showAdvancedOptions ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
+        <div *ngIf="showAdvancedOptions" class="advanced-content">
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Descripción (opcional)</mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="task-form-sidenav-actions">
+        <button mat-stroked-button (click)="onCancel()">Cancelar</button>
+        <button mat-flat-button color="primary" [disabled]="!taskForm.valid" type="submit">
+          <mat-icon>{{ taskToEdit ? 'save_outlined' : 'add_circle_outline' }}</mat-icon>
+          {{ taskToEdit ? 'Guardar Cambios' : 'Crear Tarea' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

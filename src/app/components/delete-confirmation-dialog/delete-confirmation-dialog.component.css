@@ -1,0 +1,26 @@
+.confirmation-dialog-container {
+  padding: 20px;
+}
+
+mat-dialog-content p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+mat-dialog-actions {
+  padding-top: 16px;
+}
+
+.dark-theme .confirmation-dialog-container {
+  background-color: var(--app-dark-surface-color, #303030);
+  color: var(--app-dark-text-primary-color, #ffffff);
+}
+
+.dark-theme mat-dialog-content p {
+  color: var(--app-dark-text-secondary-color, #e0e0e0);
+}
+
+.dark-theme mat-dialog-actions button[mat-button] {
+  color: var(--app-dark-text-secondary-color, #e0e0e0);
+}
+

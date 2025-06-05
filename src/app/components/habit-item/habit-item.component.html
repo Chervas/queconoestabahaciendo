@@ -1,0 +1,62 @@
+<div class="habit-item-card" [class.completed]="isCompleted" [attr.id]="getUniqueId()">
+  <div class="habit-header">
+    <h3 class="habit-title">{{ habit.name }}</h3>
+    <div class="habit-actions">
+      <button class="habit-action-button" [matMenuTriggerFor]="habitMenu" aria-label="Opciones de hábito">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #habitMenu="matMenu">
+        <button mat-menu-item (click)="onEditHabit()">
+          <mat-icon>edit</mat-icon>
+          <span>Editar</span>
+        </button>
+        <button mat-menu-item (click)="onDeleteHabit()">
+          <mat-icon>delete</mat-icon>
+          <span>Eliminar</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
+  
+  <div class="habit-progress" *ngIf="habit.type === habitType.COUNTER">
+    <div class="progress-text">
+      <span class="progress-status">{{ getProgressText() }}</span>
+      <span class="progress-target" *ngIf="habit.hasTarget && habit.targetCount">{{ getProgressFraction() }}</span>
+    </div>
+    <div class="progress-bar-container">
+      <div #progressBar class="progress-bar" [attr.data-habit-id]="habit.id" [@progressAnimation]="animationState"></div>
+    </div>
+  </div>
+  
+  <div class="habit-matrix">
+    <app-progress-matrix 
+      [progressData]="progressMatrix" 
+      [currentProgress]="getTodayProgress()" 
+      [totalProgress]="habit.hasTarget ? habit.targetCount : 1"
+      [habitFrequency]="'daily'">
+    </app-progress-matrix>
+  </div>
+  
+  <div class="habit-footer">
+    <div class="habit-status" [class.completed]="isCompleted">
+      {{ getStatusText() }}
+    </div>
+    
+    <ng-container *ngIf="habit.type === habitType.COUNTER">
+      <button 
+        class="habit-action-main increment" 
+        [class.completed]="isCompleted"
+        (click)="onTrackProgress()" 
+        [disabled]="isCompleted">
+        <mat-icon>{{ isCompleted ? 'check' : 'add' }}</mat-icon>
+      </button>
+    </ng-container>
+    
+    <ng-container *ngIf="habit.type === habitType.QUIT">
+      <div class="quit-counter">
+        <div class="quit-counter-value">{{ getQuitDaysCount() }}</div>
+        <div class="quit-counter-label">{{ getQuitDaysLabel() }}</div>
+      </div>
+    </ng-container>
+  </div>
+</div>

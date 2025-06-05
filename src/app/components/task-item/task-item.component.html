@@ -1,0 +1,70 @@
+<mat-card class="m3-task-item-card" [ngClass]="getTaskCardClasses()">
+  <!-- Marcador para la tarea más reciente que fue activa -->
+  <div *ngIf="showAnteriorTareaActivaSinTerminarMarker" class="m3-previous-active-marker">
+    <mat-icon class="m3-previous-active-icon">history_toggle_off</mat-icon>
+    <span>Anterior tarea activa sin terminar</span>
+  </div>
+
+  <!-- Marcador para otras tareas que fueron activas pero no son la más reciente -->
+  <div *ngIf="showTareaSinTerminarMarker" class="m3-started-task-marker">
+    <mat-icon class="m3-started-task-icon">pending_actions</mat-icon> <!-- Icono actualizado -->
+    <span>Tarea sin terminar</span>
+  </div>
+
+  <div class="m3-task-item-main-content-wrapper">
+    <!-- Fila Superior: Icono Menú, Título, Subtítulo, Chip Prioridad, Botón Play -->
+    <div class="m3-card-row m3-card-header-row">
+      <div class="m3-task-main-info">
+        <button mat-icon-button class="m3-icon-button-sm m3-task-options-button" [matMenuTriggerFor]="taskMenu" aria-label="Opciones de tarea">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #taskMenu="matMenu" class="m3-task-options-menu">
+          <button mat-menu-item (click)="onEdit()">
+            <mat-icon>edit_outlined</mat-icon>
+            <span>Editar</span>
+          </button>
+          <button mat-menu-item (click)="onDelete()">
+            <mat-icon>delete_outline</mat-icon>
+            <span>Eliminar</span>
+          </button>
+        </mat-menu>
+        <div class="m3-title-subtitle-group">
+          <h3 class="m3-task-title">{{ task.title }}</h3>
+          <span class="m3-task-subtitle">{{ task.createdAt | timeAgo }}</span>
+        </div>
+      </div>
+      <div class="m3-task-meta-info">
+        <button mat-flat-button class="m3-priority-tonal-button" [ngStyle]="getPriorityButtonStyles()" [matMenuTriggerFor]="priorityMenu">
+          <span>{{ task.priority | priorityTranslate }}</span> 
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #priorityMenu="matMenu">
+          <button mat-menu-item *ngFor="let priority of availablePriorities" (click)="onChangePriority(priority)">
+            <span>{{ priority | priorityTranslate }}</span>
+          </button>
+        </mat-menu>
+        <button mat-icon-button class="m3-icon-tonal-button m3-play-pause-button-item" (click)="onToggleActivation()" aria-label="Activar tarea">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Descripción (Oculta inicialmente - Requisito V5-011) -->
+    <div class="m3-card-row m3-card-content-row" *ngIf="isDescriptionExpanded && hasDescription">
+      <div class="m3-task-description-container">
+        <p class="m3-task-description" [class.expanded-description]="isDescriptionExpanded">
+          {{ trimmedDescription }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página con divisor y botón Expandir -->
+  <div class="m3-task-item-footer" *ngIf="showExpandButton">
+    <div class="m3-footer-divider"></div>
+    <button mat-button class="m3-button-expand" (click)="toggleDescriptionExpansion()">
+      {{ isDescriptionExpanded ? "Menos" : "Expandir" }}
+    </button>
+  </div>
+</mat-card>
+

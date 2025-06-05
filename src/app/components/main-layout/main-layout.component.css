@@ -1,0 +1,223 @@
+.add-task-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    height: 56px;
+    padding: 0 20px;
+    border-radius: 16px;
+    background-color: var(--app-light-chip-priority-bg);
+    color: var(--app-light-chip-priority-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--app-font-family, "Roboto", sans-serif);
+    font-size: .875rem;
+    font-weight: 500;
+    letter-spacing: .1px;
+    text-transform: none;
+    box-shadow: var(--md-sys-elevation-level3, 0px 4px 8px 3px rgba(0, 0, 0, .15), 0px 1px 3px rgba(0, 0, 0, .3));
+    border: none;
+    cursor: pointer;
+    transition: background-color .3s ease, box-shadow .3s ease;
+}
+
+@media (max-width: 600px) {
+    .add-task-fab {
+        bottom: 16px;
+        right: 16px;
+        height: 48px;
+        padding: 0 16px;
+        border-radius: 12px;
+    }
+}
+
+.main-sidenav-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: padding-left 0.3s ease;
+  background-color: #FFFFFF; /* Asegurar que el fondo sea blanco */
+}
+
+/* Ajustes para el contenido principal con navigation rail */
+.main-content-with-rail {
+  padding-left: 72px; /* Ancho del rail lateral */
+}
+
+.main-content-with-rail.expanded {
+  padding-left: 200px; /* Ancho del rail expandido */
+}
+
+@media (max-width: 767px) {
+  .main-content-with-rail {
+    padding-left: 0;
+    /* Eliminado padding-bottom según feedback */
+  }
+}
+
+.app-toolbar {
+  background-color: var(--app-light-surface, #FFFFFF);
+  color: var(--app-light-on-surface, #1C1B1F);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+
+.dark-theme .app-toolbar {
+  background-color: var(--app-dark-surface, #1C1B1F);
+  color: var(--app-dark-on-surface, #E6E1E5);
+}
+
+.toolbar-content-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.app-logo {
+  height: 40px;
+  margin-right: 16px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.content-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.row-active-task, .row-pending-progress {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.active-task-column {
+  flex: 1;
+}
+
+.active-task-section-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pending-tasks-column {
+  flex: 2;
+}
+
+.progress-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.progress-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.progress-image-full {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.progress-text {
+  margin: 0;
+  color: var(--app-light-on-surface-variant, #49454F);
+}
+
+.dark-theme .progress-text {
+  color: var(--app-dark-on-surface-variant, #CAC4D0);
+}
+
+.m3-section-title {
+  font-size: var(--app-font-size-title-medium, 16px);
+  font-weight: 500;
+  margin: 0;
+  color: var(--app-light-on-surface, #1C1B1F);
+}
+
+.dark-theme .m3-section-title {
+  color: var(--app-dark-on-surface, #E6E1E5);
+}
+
+.dark-theme .add-task-fab {
+  background-color: #69F0AE !important; /* Versión más oscura para tema oscuro */
+  color: #000000 !important;
+}
+
+.fab-text {
+  margin-left: 8px;
+}
+
+/* Footer eliminado según solicitud del usuario */
+
+.task-form-sidenav {
+  width: 100%;
+  max-width: 500px;
+}
+
+.end-workday-button {
+  margin-top: auto;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .row-pending-progress {
+    flex-direction: column;
+  }
+  
+  .content-area {
+    padding: 8px;
+  }
+}
+
+/* Estilos para el modo oscuro */
+:host-context(.dark-theme) .app-toolbar {
+  background-color: var(--app-dark-surface, #1C1B1F);
+  color: var(--app-dark-on-surface, #E6E1E5);
+}
+
+:host-context(.dark-theme) .progress-text {
+  color: var(--app-dark-on-surface-variant, #CAC4D0);
+}
+
+:host-context(.dark-theme) .m3-section-title {
+  color: var(--app-dark-on-surface, #E6E1E5);
+}
+
+:host-context(.dark-theme) .add-task-fab {
+  background-color: #69F0AE !important;
+  color: #000000 !important;
+}

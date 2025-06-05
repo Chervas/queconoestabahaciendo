@@ -1,0 +1,87 @@
+<mat-sidenav-container class="main-sidenav-container">
+  <mat-sidenav #taskFormSidenav mode="over" position="end" class="task-form-sidenav" 
+               (closedStart)="isSidenavOpen = false" 
+               [opened]="isSidenavOpen">
+    <app-task-form 
+      *ngIf="isSidenavOpen" 
+      [taskToEdit]="currentTaskForForm" 
+      (formSubmit)="handleTaskFormSubmit($event)" 
+      (closeSidenav)="closeTaskFormSidenav()">
+    </app-task-form>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="main-container" [class.main-content-with-rail]="true" [class.expanded]="navigationRailExpanded">
+      <!-- Navigation Rail Component -->
+      <app-navigation-rail 
+        [activeSection]="activeSection" 
+        (sectionChange)="onSectionChange($event)"
+        (expandedChange)="onNavigationRailExpandedChange($event)">
+      </app-navigation-rail>
+      
+      <mat-toolbar color="background" class="app-toolbar">
+        <div class="toolbar-content-wrapper">
+          <img src="assets/images/logo_nuevo.png" alt="Qué Coño Estaba Haciendo Logo" class="app-logo">
+          <span class="toolbar-spacer"></span>
+          <button mat-icon-button aria-label="Toggle dark mode" (click)="toggleDarkMode()">
+            <mat-icon>{{ isDarkMode ? 'light_mode_outlined' : 'dark_mode_outlined' }}</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="View history" (click)="navigateToHistory()">
+            <mat-icon>history_outlined</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+
+      <div class="content-area">
+        <!-- Router Outlet para permitir la navegación entre vistas -->
+        <router-outlet *ngIf="activeSection === 'habits' || activeSection === 'history' || activeSection === 'island'"></router-outlet>
+
+        <!-- Vista principal de tareas, solo visible cuando no estamos en otra sección -->
+        <div *ngIf="activeSection === 'tasks'">
+          <div class="row-active-task">
+            <div class="column active-task-column">
+              <div class="active-task-section-container">
+                <h2 class="m3-section-title">Tarea activa</h2>
+                <app-active-task-display 
+                  class="active-task-section" 
+                  (requestOpenAddTaskDialog)="openTaskFormSidenav()" 
+                  (requestOpenEditTaskDialog)="openTaskFormSidenav($event)"
+                ></app-active-task-display>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-pending-progress">
+            <div class="column pending-tasks-column">
+              <app-task-list 
+                class="task-list-section"
+                (requestOpenAddTaskDialog)="openTaskFormSidenav()" 
+                (requestOpenEditTaskSidenav)="openTaskFormSidenav($event)" 
+              ></app-task-list>
+            </div>
+            <div class="column progress-column">
+              <h2 class="m3-section-title">Progreso</h2>
+              <p class="progress-text">¿Cuántas plantitas serás capaz de hacer crecer? Sigue completando tareas</p>
+              <div class="progress-image-container">
+                <img src="assets/images/plantita.jpg" alt="Progreso Plantita" class="progress-image-full">
+              </div>
+              
+              <!-- Botón para terminar jornada laboral -->
+              <button mat-raised-button color="accent" class="end-workday-button" (click)="endWorkday()">
+                <mat-icon>beach_access</mat-icon>
+                Terminar jornada laboral
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button mat-extended-fab class="add-task-fab" (click)="openTaskFormSidenav()" aria-label="Crear nueva tarea">
+        <mat-icon>add</mat-icon>
+        <span class="fab-text">Añadir tarea</span>
+      </button>
+
+      <!-- Footer eliminado según solicitud del usuario -->
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

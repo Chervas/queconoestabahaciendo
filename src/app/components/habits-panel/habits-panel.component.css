@@ -1,0 +1,271 @@
+.habits-panel-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.habits-sidenav-container {
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.habit-form-sidenav {
+  width: 100%;
+  max-width: 500px;
+}
+
+.habits-content {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.no-habits-message {
+  margin-bottom: 24px;
+}
+
+/* CORRECCIÓN V30: Ajustar proporción de columnas en desktop (3fr 1fr) */
+.habits-layout {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 24px;
+}
+
+/* Estilos para la columna de hábitos */
+.habits-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Estilos para la columna de estado */
+.estado-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Grid para las tarjetas de hábitos - Sin límite de tarjetas */
+.habits-grid {
+  width: 100%;
+}
+
+/* CORRECCIÓN V30: Limitar a dos columnas de tarjetas como solicitó el usuario */
+.habits-cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.habits-card-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para las tarjetas de estado */
+.estado-card {
+  background-color: #f8f3e0;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.weather-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.weather-icons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.pixel-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.sun-pixel {
+  background-color: #FFD700;
+  border-radius: 0;
+  box-shadow: 0 0 0 2px #f8f3e0, 0 0 0 4px #FFD700;
+}
+
+.cloud-pixel {
+  background-color: #E0E0E0;
+  border-radius: 0;
+  box-shadow: 0 0 0 2px #f8f3e0, 0 0 0 4px #E0E0E0;
+}
+
+.weather-prediction h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+}
+
+.weather-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 16px 0;
+}
+
+.weather-days {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weather-day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.weather-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.sun-icon {
+  background-color: #FFD700;
+}
+
+.cloud-icon {
+  background-color: #E0E0E0;
+}
+
+.weather-day-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-name {
+  font-weight: 500;
+}
+
+.day-temp {
+  font-size: 14px;
+}
+
+.weather-condition {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Estilos para la sección de hábitos completados */
+.habits-completed-card h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+}
+
+.habits-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.habit-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.habit-stat-label {
+  font-size: 14px;
+  color: #666;
+}
+
+.habit-stat-progress-bar {
+  height: 4px;
+  background-color: rgba(99, 99, 9, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.habit-stat-progress {
+  height: 100%;
+  background-color: #636309;
+  border-radius: 2px;
+  transition: width 0.5s ease-in-out;
+}
+
+.habit-stat-value {
+  font-size: 14px;
+  text-align: right;
+}
+
+.habits-impact-message {
+  font-size: 14px;
+  color: #666;
+  font-style: italic;
+  margin-top: 16px;
+}
+
+/* Estilos para los títulos de sección */
+.section-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+/* Botón flotante para crear hábito con estilos específicos */
+.add-task-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  height: 56px;
+  padding: 0 20px;
+  border-radius: 16px;
+  background-color: var(--app-light-chip-priority-bg);
+  color: var(--app-light-chip-priority-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--app-font-family, "Roboto", sans-serif);
+  font-size: .875rem;
+  font-weight: 500;
+  letter-spacing: .1px;
+  text-transform: none;
+  box-shadow: var(--md-sys-elevation-level3, 0px 4px 8px 3px rgba(0, 0, 0, .15), 0px 1px 3px rgba(0, 0, 0, .3));
+  border: none;
+  cursor: pointer;
+  transition: background-color .3s ease, box-shadow .3s ease;
+  z-index: 100;
+}
+
+/* CORRECCIÓN V30: Mantener siempre dos columnas en todos los tamaños de pantalla */
+@media (max-width: 1024px) {
+  .habits-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .habits-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .habits-cards-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Solo en móvil muy pequeño cambiamos a una columna */
+@media (max-width: 480px) {
+  .habits-cards-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .habits-content {
+    padding: 16px;
+  }
+}

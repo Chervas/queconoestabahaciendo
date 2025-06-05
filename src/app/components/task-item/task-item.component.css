@@ -1,0 +1,369 @@
+/* Task Item Card - Material 3 Refactor v7 (Pulido Final) */
+.m3-task-item-card {
+  background-color: var(--app-light-surface-container-lowest, #FBF9EF);
+  color: var(--app-light-on-surface);
+  border-radius: var(--app-border-radius-card);
+  padding: 0; 
+  margin-bottom: var(--app-spacing-inter-task-gap); 
+  border: 1px solid var(--app-light-outline-variant, transparent);
+  display: flex;
+  flex-direction: column;
+  position: relative; 
+}
+
+/* Estilo para "Anterior tarea activa sin terminar" */
+.m3-previous-active-marker {
+  font-size: var(--app-font-size-label-small, 11px);
+  font-weight: 500;
+  color: rgb(28, 27, 31); /* Texto oscuro como en la especificación */
+  padding: 4px 8px;
+  background-color: rgb(255, 231, 157) !important; /* Fondo amarillo especificado */
+  text-align: center;
+  display: inline-flex; /* Cambiado a inline-flex para que se ajuste al contenido si es necesario, pero con width 100% se expandirá */
+  align-items: center;
+  justify-content: center;
+  gap: 4px; /* Espacio entre icono y texto */
+  width: 100%; 
+  box-sizing: border-box; 
+  border-top-left-radius: var(--app-border-radius-card); 
+  border-top-right-radius: var(--app-border-radius-card);
+}
+
+.dark-theme .m3-previous-active-marker {
+  /* Mantener un color de texto legible en tema oscuro si el fondo es claro */
+  /* O ajustar el fondo para el tema oscuro si es necesario */
+  background-color: rgb(94, 88, 66) !important; /* Ejemplo de un amarillo más oscuro para tema dark */
+  color: rgb(230, 225, 229);
+}
+
+.m3-previous-active-marker .m3-previous-active-icon.mat-icon,
+.m3-started-task-marker .m3-started-task-icon.mat-icon {
+  font-size: 18px; 
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+}
+
+/* Estilo para "Tarea sin terminar" */
+.m3-started-task-marker {
+  font-size: var(--app-font-size-label-small, 11px);
+  font-weight: 500;
+  color: var(--app-light-on-surface-variant, #49454F); /* Color de texto grisáceo */
+  padding: 4px 8px;
+  background-color: var(--app-light-surface-container-high, #F0EEEF); /* Fondo gris claro como se mencionó */
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  border-top-left-radius: var(--app-border-radius-card);
+  border-top-right-radius: var(--app-border-radius-card);
+}
+
+.dark-theme .m3-started-task-marker {
+  background-color: var(--app-dark-surface-container-high, #49454F);
+  color: var(--app-dark-on-surface-variant, #CAC4D0);
+}
+
+.m3-task-item-main-content-wrapper {
+  padding: var(--app-spacing-card-padding);
+}
+
+.dark-theme .m3-task-item-card {
+  background-color: var(--app-dark-surface-container-lowest, #201F1B); 
+  color: var(--app-dark-on-surface);
+  border-color: var(--app-dark-outline-variant, transparent);
+}
+
+.m3-card-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--app-spacing-internal-card-large);
+}
+
+.m3-card-row:last-child {
+  margin-bottom: 0;
+}
+
+.m3-card-header-row {
+  justify-content: space-between;
+  gap: var(--app-spacing-internal-card-primary);
+}
+
+.m3-task-main-info {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-internal-card-secondary);
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.m3-icon-button-sm.m3-task-options-button {
+  color: var(--app-light-on-surface-variant);
+  width: 36px; 
+  height: 36px;
+}
+
+.dark-theme .m3-icon-button-sm.m3-task-options-button {
+  color: var(--app-dark-on-surface-variant);
+}
+
+.m3-title-subtitle-group {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.m3-task-title {
+  font-size: var(--app-font-size-task-title);
+  font-weight: var(--app-font-weight-task-title);
+  color: var(--app-light-on-surface);
+  margin: 0;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dark-theme .m3-task-title {
+  color: var(--app-dark-on-surface);
+}
+
+.m3-task-subtitle {
+  font-size: var(--app-font-size-task-subtitle);
+  font-weight: var(--app-font-weight-task-subtitle);
+  color: var(--app-light-on-surface-variant); 
+  margin: 0;
+}
+
+.dark-theme .m3-task-subtitle {
+  color: var(--app-dark-on-surface-variant);
+}
+
+.m3-task-meta-info {
+  display: flex;
+  align-items: center;
+  gap: var(--app-spacing-internal-card-primary);
+  flex-shrink: 0;
+}
+
+.m3-priority-chip {
+  border-radius: var(--app-border-radius-chip, 8px);
+  padding: 4px 12px;
+  font-size: var(--app-font-size-chip, 12px);
+  font-weight: var(--app-font-weight-chip, 500);
+  display: inline-flex;
+  align-items: center;
+  line-height: 20px;
+  min-height: 28px; 
+  height: 28px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+}
+
+.m3-priority-chip.priority-urgent {
+  background-color: var(--app-light-priority-urgent-bg);
+  color: var(--app-light-priority-urgent-text);
+  border-color: var(--app-light-priority-urgent-bg);
+}
+.dark-theme .m3-priority-chip.priority-urgent {
+  background-color: var(--app-dark-priority-urgent-bg);
+  color: var(--app-dark-priority-urgent-text);
+  border-color: var(--app-dark-priority-urgent-bg);
+}
+
+.m3-priority-chip.priority-high {
+  background-color: var(--app-light-priority-high-bg);
+  color: var(--app-light-priority-high-text);
+  border-color: var(--app-light-priority-high-bg);
+}
+.dark-theme .m3-priority-chip.priority-high {
+  background-color: var(--app-dark-priority-high-bg);
+  color: var(--app-dark-priority-high-text);
+  border-color: var(--app-dark-priority-high-bg);
+}
+
+.m3-priority-chip.priority-normal {
+  background-color: var(--app-light-priority-normal-bg);
+  color: var(--app-light-priority-normal-text);
+  border-color: var(--app-light-priority-normal-bg);
+}
+.dark-theme .m3-priority-chip.priority-normal {
+  background-color: var(--app-dark-priority-normal-bg);
+  color: var(--app-dark-priority-normal-text);
+  border-color: var(--app-dark-priority-normal-bg);
+}
+
+.m3-priority-chip.priority-low {
+  background-color: var(--app-light-priority-low-bg);
+  color: var(--app-light-priority-low-text);
+  border-color: var(--app-light-priority-low-bg);
+}
+.dark-theme .m3-priority-chip.priority-low {
+  background-color: var(--app-dark-priority-low-bg);
+  color: var(--app-dark-priority-low-text);
+  border-color: var(--app-dark-priority-low-bg);
+}
+
+.m3-priority-chip span {
+  margin-right: var(--app-spacing-internal-card-secondary);
+}
+
+.m3-priority-chip mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.m3-icon-tonal-button.m3-play-pause-button-item {
+  background-color: var(--app-light-icon-button-bg); /* Using global light theme variable */
+  color: var(--app-light-icon-button-fg);
+  border-radius: var(--app-border-radius-icon-button-circular); 
+  width: 40px; 
+  height: 40px; 
+  padding: 0; 
+  border: none;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  box-shadow: none; 
+}
+
+.dark-theme .m3-icon-tonal-button.m3-play-pause-button-item {
+  background-color: var(--app-dark-icon-button-bg); /* Using global dark theme variable */
+  color: var(--app-dark-icon-button-fg);
+}
+
+.m3-card-content-row {
+  margin-bottom: var(--app-spacing-description-margin-bottom);
+}
+
+.m3-task-description-container {
+  margin-left: calc(36px + var(--app-spacing-internal-card-secondary)); 
+  flex-grow: 1;
+}
+
+.m3-task-description {
+  font-size: var(--app-font-size-description);
+  font-weight: var(--app-font-weight-description);
+  color: var(--app-light-on-surface-variant);
+  margin: 0;
+  line-height: 1.5;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: pre-wrap; 
+  word-break: break-word; 
+  overflow-wrap: break-word; 
+  display: -webkit-box;
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: calc(1.5em * 3); 
+}
+
+.dark-theme .m3-task-description {
+  color: var(--app-dark-on-surface-variant);
+}
+
+.m3-task-description.expanded-description {
+  display: block; 
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+  overflow: visible;
+  text-overflow: clip; 
+  max-height: none; 
+}
+
+.m3-task-item-footer {
+  padding: 0; 
+  margin-top: var(--app-spacing-internal-card-large);
+}
+
+.m3-footer-divider {
+  border-top: 1px solid var(--app-light-outline); 
+  width: 100%;
+  margin: 0;
+}
+
+.dark-theme .m3-footer-divider {
+  border-top-color: var(--app-dark-outline);
+}
+
+.m3-button-expand {
+  font-family: var(--app-font-family, "Roboto", sans-serif);
+  font-size: var(--app-font-size-label-small, 11px); 
+  font-weight: 500; 
+  letter-spacing: 0.5px; 
+  line-height: 16px; 
+  color: var(--app-light-primary-action-text); 
+  background-color: transparent;
+  border: none;
+  padding: 8px 16px; 
+  cursor: pointer;
+  text-align: center; 
+  width: 100%; 
+  box-sizing: border-box; 
+  border-radius: var(--app-border-radius-button-small, 4px);
+  transition: background-color 0.2s ease;
+}
+
+.m3-button-expand:hover {
+  background-color: rgba(0,0,0,0.04);
+}
+
+.dark-theme .m3-button-expand {
+  color: var(--app-dark-primary-action-text);
+}
+
+.dark-theme .m3-button-expand:hover {
+  background-color: rgba(255,255,255,0.08);
+}
+
+.m3-task-options-menu .mat-mdc-menu-item {
+  min-height: 40px;
+  font-size: 14px;
+}
+
+.m3-task-options-menu .mat-mdc-menu-item mat-icon {
+  margin-right: 12px;
+  color: var(--app-light-on-surface-variant);
+}
+
+.dark-theme .m3-task-options-menu .mat-mdc-menu-item mat-icon {
+  color: var(--app-dark-on-surface-variant);
+}
+
+@media (max-width: 600px) {
+  .m3-card-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--app-spacing-internal-card-large);
+  }
+  .m3-task-meta-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .m3-task-description-container {
+    margin-left: 0; 
+  }
+  .m3-button-expand {
+    text-align: center; 
+    font-size: calc(var(--app-font-size-label-small, 11px) * 0.95);
+    padding: var(--app-spacing-internal-card-secondary) var(--app-spacing-card-padding-mobile, 16px);
+  }
+  .m3-priority-chip {
+    padding: 2px 10px;
+    min-height: 24px;
+    height: 24px;
+    font-size: calc(var(--app-font-size-chip, 12px) * 0.9);
+  }
+  .m3-priority-chip mat-icon {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+  }
+}
+
