@@ -162,8 +162,8 @@
 }
 
 .m3-section-title {
-  font-size: var(--app-font-size-title-medium, 16px);
-  font-weight: 500;
+  font-size: var(--app-font-size-section-title);
+  font-weight: var(--app-font-weight-section-title);
   margin: 0;
   color: var(--app-light-on-surface, #1C1B1F);
 }

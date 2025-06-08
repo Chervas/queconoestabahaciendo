@@ -49,8 +49,9 @@ export class HabitsPanelComponent implements OnInit, OnDestroy {
   completedWeeklyCount = 0;
   // CORRECCIÓN: Añadir contador para hábitos mensuales completados
   completedMonthlyCount = 0;
-  
+
   currentPhase: AppPhase = AppPhase.WORK;
+  navigationRailExpanded = false;
   
   private habitService = inject(HabitService);
   private dialog = inject(MatDialog);

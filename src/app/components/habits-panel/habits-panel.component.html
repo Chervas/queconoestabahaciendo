@@ -1,6 +1,10 @@
 <div class="habits-panel-container">
   <!-- Integración con el navigation rail -->
-  <app-navigation-rail [currentSection]="'habits'" [currentPhase]="currentPhase"></app-navigation-rail>
+  <app-navigation-rail
+    [currentSection]="'habits'"
+    [currentPhase]="currentPhase"
+    (expandedChange)="navigationRailExpanded = $event">
+  </app-navigation-rail>
 
   <!-- Sidenav para formulario de hábitos -->
   <mat-sidenav-container class="habits-sidenav-container">
@@ -15,7 +19,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <div class="habits-content main-container main-content-with-rail">
+      <div class="habits-content main-container main-content-with-rail" [class.expanded]="navigationRailExpanded">
         <div class="habits-layout">
           <!-- Columna izquierda: Hábitos -->
           <div class="habits-column">
@@ -205,7 +209,7 @@
                 </div>
                 
                 <!-- CORRECCIÓN: Añadir barra de progreso para hábitos mensuales -->
-                <div class="habit-stat-item" *ngIf="monthlyHabits.length > 0">
+                <div class="habit-stat-item">
                   <div class="habit-stat-label">Mensuales</div>
                   <div class="habit-stat-progress-bar">
                     <div class="habit-stat-progress" [style.width]="(completedMonthlyCount / (monthlyHabits.length || 1)) * 100 + '%'"></div>
