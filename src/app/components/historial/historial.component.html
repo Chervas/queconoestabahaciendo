@@ -7,29 +7,35 @@
   </mat-toolbar>
 
   <div class="history-content" *ngIf="!isLoading">
-    <div class="dashboard-section">
-      <h2>Tareas terminadas</h2>
-      <mat-card *ngFor="let t of tasksCompleted; trackBy: trackById" class="history-item-card">
-        <mat-card-title>{{ t.metadata?.taskTitle }}</mat-card-title>
-        <mat-card-subtitle>{{ t.timestamp | date:'medium' }}</mat-card-subtitle>
-        <mat-card-content>
-          <p>Duración: {{ t.metadata?.duration | formatTime }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
+    <div class="history-sections">
+      <section class="history-section tasks-section">
+        <h2 class="section-title">Tareas terminadas</h2>
+        <div class="card-grid">
+          <mat-card *ngFor="let t of tasksCompleted; trackBy: trackById" class="history-item-card">
+            <mat-card-title>{{ t.metadata?.taskTitle }}</mat-card-title>
+            <mat-card-subtitle>{{ t.timestamp | date:'medium' }}</mat-card-subtitle>
+            <mat-card-content>
+              <p>Duración: {{ t.metadata?.duration | formatTime }}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </section>
 
-    <div class="dashboard-section">
-      <h2>Hábitos activos</h2>
-      <mat-card *ngFor="let h of activeHabits" class="history-item-card">
-        <mat-card-title>{{ h.name }}</mat-card-title>
-        <app-progress-matrix
-          [progressData]="getYearProgress(h)"
-          [matrixColumns]="53"
-          [currentProgress]="getCurrentProgress(h)"
-          [totalProgress]="h.hasTarget ? h.targetCount || 0 : 0"
-          [habitFrequency]="h.type === 'quit' ? 'quit' : h.frequency">
-        </app-progress-matrix>
-      </mat-card>
+      <section class="history-section habits-section">
+        <h2 class="section-title">Hábitos activos</h2>
+        <div class="card-grid">
+          <mat-card *ngFor="let h of activeHabits" class="history-item-card">
+            <mat-card-title>{{ h.name }}</mat-card-title>
+            <app-progress-matrix
+              [progressData]="getYearProgress(h)"
+              [matrixColumns]="53"
+              [currentProgress]="getCurrentProgress(h)"
+              [totalProgress]="h.hasTarget ? h.targetCount || 0 : 0"
+              [habitFrequency]="h.type === 'quit' ? 'quit' : h.frequency">
+            </app-progress-matrix>
+          </mat-card>
+        </div>
+      </section>
     </div>
   </div>
 </div>

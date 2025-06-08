@@ -2,7 +2,8 @@
   width: 100%;
   margin-top: 8px;
   position: relative;
-  overflow: none; /* CORRECCIÓN V30: Cambiar a overflow: none como solicitó el usuario */
+  overflow-x: auto; /* Allow horizontal scroll when needed */
+  --columns: 35;
 }
 
 .matrix-container {
@@ -11,12 +12,13 @@
   gap: 3px;
   position: relative;
   width: 100%;
+  min-width: calc(var(--columns) * 9px);
 }
 
 .matrix-row {
   display: flex;
   gap: 3px;
-  justify-content: space-around;
+  justify-content: flex-start;
   width: 100%;
 }
 
