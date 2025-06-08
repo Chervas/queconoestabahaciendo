@@ -16,7 +16,7 @@
 .matrix-row {
   display: flex;
   gap: 3px;
-  justify-content: flex-start; /* Alinear a la izquierda */
+  justify-content: space-around;
   width: 100%;
 }
 

@@ -20,6 +20,7 @@
   padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: #fff;
 }
 
 .no-habits-message {
@@ -268,5 +269,6 @@
   
   .habits-content {
     padding: 16px;
+    background-color: #fff;
   }
 }
