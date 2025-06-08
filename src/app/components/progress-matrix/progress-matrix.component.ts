@@ -152,6 +152,7 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
     const lastCol = columns - 1;
     
     // CORRECCIÓN V30: Asegurar que el punto del día actual se coloque en la fila correcta
+    const rows = this.matrixRows.length;
     const targetRow = this.habitFrequency === 'weekly' || this.habitFrequency === 'monthly' ? rows - 1 : todayIndex;
 
     if (this.matrixRows[targetRow] && this.matrixRows[targetRow][lastCol]) {
