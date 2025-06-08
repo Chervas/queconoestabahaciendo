@@ -1,4 +1,4 @@
-<div class="progress-matrix">
+<div class="progress-matrix" [style.--columns]="matrixColumns">
   <div class="matrix-container">
     <!-- Matriz uniforme de puntos para visualizar el progreso -->
     <div class="matrix-row" *ngFor="let row of matrixRows; let i = index">

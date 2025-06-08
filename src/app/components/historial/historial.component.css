@@ -145,6 +145,26 @@
   font-size: 22px;
 }
 
+.history-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.history-section .section-title {
+  margin-bottom: 12px;
+  font-size: 1.2rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+}
+
 @media (max-width: 600px) {
   .history-content {
     padding: 8px;
