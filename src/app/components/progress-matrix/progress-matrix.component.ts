@@ -16,10 +16,11 @@ interface MatrixDot {
   styleUrls: ['./progress-matrix.component.css']
 })
 export class ProgressMatrixComponent implements OnInit, OnChanges {
-  @Input() progressData: boolean[] = [];
+  @Input() progressData: number[] = [];
   @Input() currentProgress: number = 0;
   @Input() totalProgress: number = 0;
   @Input() habitFrequency: string = 'daily'; // 'daily', 'weekly', 'monthly'
+  @Input() matrixColumns: number = 35;
   
   matrixRows: MatrixDot[][] = [];
   
@@ -37,8 +38,7 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
   }
   
   generateMatrix(): void {
-    // Siempre usar 35 columnas y 7 filas
-    const columns = 35;
+    const columns = this.matrixColumns;
     const rows = 7;
 
     // Inicializar la matriz vacía
@@ -86,15 +86,56 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
 
     const dataLength = this.progressData.length;
 
-    for (let i = 0; i < dataLength; i++) {
-      const age = dataLength - 1 - i; // 0 es hoy
-      const col = columns - 1 - Math.floor(age / rows);
-      const row = rows - 1 - (age % rows);
-
-      if (col >= 0 && col < columns && row >= 0 && row < rows) {
-        if (this.progressData[i]) {
+    if (this.habitFrequency === 'weekly') {
+      const countsPerWeek = new Array(columns).fill(0);
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const week = Math.floor(age / 7);
+        const col = columns - 1 - week;
+        if (col >= 0) {
+          countsPerWeek[col] += this.progressData[i];
+        }
+      }
+      for (let col = 0; col < columns; col++) {
+        const count = countsPerWeek[col];
+        if (count > 0) {
+          const row = rows - 1;
+          const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
           this.matrixRows[row][col].filled = true;
-          this.matrixRows[row][col].opacity = 1.0;
+          this.matrixRows[row][col].opacity = opacity;
+        }
+      }
+    } else if (this.habitFrequency === 'monthly') {
+      const daysPerMonth = 30;
+      const countsPerMonth = new Array(columns).fill(0);
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const month = Math.floor(age / daysPerMonth);
+        const col = columns - 1 - month;
+        if (col >= 0) {
+          countsPerMonth[col] += this.progressData[i];
+        }
+      }
+      for (let col = 0; col < columns; col++) {
+        const count = countsPerMonth[col];
+        if (count > 0) {
+          const row = rows - 1;
+          const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
+          this.matrixRows[row][col].filled = true;
+          this.matrixRows[row][col].opacity = opacity;
+        }
+      }
+    } else {
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i; // 0 es hoy
+        const col = columns - 1 - Math.floor(age / rows);
+        const row = rows - 1 - (age % rows);
+
+        if (col >= 0 && col < columns && row >= 0 && row < rows) {
+          if (this.progressData[i] > 0) {
+            this.matrixRows[row][col].filled = true;
+            this.matrixRows[row][col].opacity = this.habitFrequency === 'quit' ? 1.0 : 1.0;
+          }
         }
       }
     }
@@ -111,9 +152,10 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
     const lastCol = columns - 1;
     
     // CORRECCIÓN V30: Asegurar que el punto del día actual se coloque en la fila correcta
-    if (this.matrixRows[todayIndex] && this.matrixRows[todayIndex][lastCol]) {
-      // Marcar como el día actual
-      this.matrixRows[todayIndex][lastCol].isToday = true;
+    const targetRow = this.habitFrequency === 'weekly' || this.habitFrequency === 'monthly' ? rows - 1 : todayIndex;
+
+    if (this.matrixRows[targetRow] && this.matrixRows[targetRow][lastCol]) {
+      this.matrixRows[targetRow][lastCol].isToday = true;
       
       // Si hay progreso actual, actualizar el punto del día actual
       if (this.currentProgress > 0) {
@@ -140,8 +182,8 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
         }
         
         // Actualizar el punto del día actual
-        this.matrixRows[todayIndex][lastCol].filled = true;
-        this.matrixRows[todayIndex][lastCol].opacity = opacity;
+        this.matrixRows[targetRow][lastCol].filled = true;
+        this.matrixRows[targetRow][lastCol].opacity = this.habitFrequency === 'quit' ? 1.0 : opacity;
       }
     }
   }

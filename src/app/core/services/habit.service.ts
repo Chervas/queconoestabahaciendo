@@ -222,29 +222,32 @@ export class HabitService {
     return todayProgress.completedCount >= habit.targetCount;
   }
 
-  getProgressMatrix(habitId: string): boolean[] {
+  getProgressCounts(habitId: string, days: number = 35): number[] {
     const habit = this.getHabitById(habitId);
     if (!habit) return [];
 
-    // Generar matriz de progreso para los últimos 35 días
-    const result: boolean[] = [];
+    const result: number[] = [];
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    for (let i = 34; i >= 0; i--) {
+    for (let i = days - 1; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
 
-      // Buscar si hay progreso para esta fecha
-      const hasProgress = habit.progress.some(p => {
+      const progressEntry = habit.progress.find(p => {
         const progressDate = new Date(p.date);
         progressDate.setHours(0, 0, 0, 0);
         return progressDate.getTime() === date.getTime();
       });
 
-      result.push(hasProgress);
+      result.push(progressEntry ? progressEntry.completedCount : 0);
     }
 
     return result;
+  }
+
+  getProgressMatrix(habitId: string, days: number = 35): boolean[] {
+    const counts = this.getProgressCounts(habitId, days);
+    return counts.map(c => c > 0);
   }
 }

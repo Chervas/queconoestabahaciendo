@@ -3,6 +3,9 @@ import { Location, CommonModule, DatePipe } from "@angular/common";
 import { HistoryEntry, HistoryEntryType } from "../../core/models/history-entry.model";
 import { HistoryService } from "../../core/services/history.service";
 import { FormatTimePipe } from "../active-task-display/active-task-display.component";
+import { HabitService } from "../../core/services/habit.service";
+import { Habit } from "../../core/models/habit.model";
+import { ProgressMatrixComponent } from "../progress-matrix/progress-matrix.component";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
@@ -10,9 +13,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatCardModule } from "@angular/material/card";
 
 @Component({
-  selector: "app-history-view",
-  templateUrl: "./history-view.component.html",
-  styleUrls: ["./history-view.component.css"],
+  selector: "app-historial",
+  templateUrl: "./historial.component.html",
+  styleUrls: ["./historial.component.css"],
   standalone: true,
   imports: [
     CommonModule,
@@ -22,22 +25,28 @@ import { MatCardModule } from "@angular/material/card";
     MatProgressSpinnerModule,
     MatCardModule,
     FormatTimePipe,
-    DatePipe
+    DatePipe,
+    ProgressMatrixComponent
   ]
 })
-export class HistoryViewComponent implements OnInit {
+export class HistorialComponent implements OnInit {
   historyEntriesSignal: Signal<HistoryEntry[]>;
   displayedHistoryEntries: HistoryEntry[] = [];
   isLoading = true;
+  tasksCompleted: HistoryEntry[] = [];
+  activeHabits: Habit[] = [];
 
   constructor(
     private historyService: HistoryService,
+    private habitService: HabitService,
     private location: Location
   ) {
     this.historyEntriesSignal = this.historyService.getHistoryEntries();
     effect(() => {
       this.displayedHistoryEntries = [...this.historyEntriesSignal()].sort((a: HistoryEntry, b: HistoryEntry) => b.timestamp - a.timestamp);
       this.isLoading = false;
+      this.tasksCompleted = this.displayedHistoryEntries.filter(e => e.type === HistoryEntryType.TASK_COMPLETED);
+      this.activeHabits = this.habitService.getHabits();
     });
   }
 
@@ -60,6 +69,15 @@ export class HistoryViewComponent implements OnInit {
 
   trackById(index: number, entry: HistoryEntry): string {
     return entry.id;
+  }
+
+  getYearProgress(habit: Habit): number[] {
+    return this.habitService.getProgressCounts(habit.id, 365);
+  }
+
+  getCurrentProgress(habit: Habit): number {
+    const data = this.getYearProgress(habit);
+    return data.length > 0 ? data[data.length - 1] : 0;
   }
   
   getIconForEntryType(type: HistoryEntryType): string {

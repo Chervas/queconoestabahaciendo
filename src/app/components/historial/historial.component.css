@@ -1,11 +1,11 @@
-.history-view-container {
+.historial-view-container {
   display: flex;
   flex-direction: column;
   height: 100vh; /* Full height view */
   background-color: var(--app-background-color, #FAF8F0);
 }
 
-.dark-theme .history-view-container {
+.dark-theme .historial-view-container {
   background-color: var(--app-dark-background-color, #263238);
 }
 

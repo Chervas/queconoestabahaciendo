@@ -29,11 +29,12 @@
   </div>
   
   <div class="habit-matrix">
-    <app-progress-matrix 
-      [progressData]="progressMatrix" 
-      [currentProgress]="getTodayProgress()" 
+    <app-progress-matrix
+      [progressData]="progressMatrix"
+      [currentProgress]="getTodayProgress()"
       [totalProgress]="habit.hasTarget ? habit.targetCount : 1"
-      [habitFrequency]="'daily'">
+      [habitFrequency]="habit.type === habitType.QUIT ? 'quit' : habit.frequency"
+      >
     </app-progress-matrix>
   </div>
   
