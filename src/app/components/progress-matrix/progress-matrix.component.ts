@@ -37,27 +37,24 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
   }
   
   generateMatrix(): void {
-    // CORRECCIÓN V30: Siempre usar 35 columnas y 7 filas
+    // Siempre usar 35 columnas y 7 filas
     const columns = 35;
     const rows = 7;
-    
-    // Inicializar la matriz completamente vacía
+
+    // Inicializar la matriz vacía
     this.initializeEmptyMatrix(rows, columns);
-    
-    // Procesar el progreso solo si hay datos válidos
+
     if (this.hasValidProgressData()) {
       this.processProgressData(columns, rows);
     }
-    
-    // Marcar el punto del día actual explícitamente
+
+    // Marcar el punto del día actual
     this.markTodayDot(columns);
   }
   
   // CORRECCIÓN V30: Método para verificar si hay datos de progreso válidos
   hasValidProgressData(): boolean {
-    // Verificar que el array de progreso existe y tiene más de un elemento
-    // Un solo elemento generalmente es el valor inicial y no debe considerarse
-    return this.progressData && Array.isArray(this.progressData) && this.progressData.length > 1;
+    return Array.isArray(this.progressData) && this.progressData.length > 0;
   }
   
   // CORRECCIÓN V30: Método separado para inicializar matriz vacía
@@ -83,48 +80,21 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
   
   // CORRECCIÓN V30: Método separado para procesar datos de progreso
   processProgressData(columns: number, rows: number): void {
-    // CORRECCIÓN V30: Verificación adicional para evitar procesar datos inválidos
     if (!this.hasValidProgressData()) {
       return;
     }
-    
-    // Crear una copia del array de progreso para no modificar el original
-    const progressCopy = [...this.progressData];
-    
-    // CORRECCIÓN V30: Eliminar el primer elemento para evitar puntos erróneos
-    // Este primer elemento suele ser un valor inicial que no representa progreso real
-    if (progressCopy.length > 0) {
-      progressCopy.shift();
-    }
-    
-    // Si después de eliminar el primer elemento no quedan datos, salir
-    if (progressCopy.length === 0) {
-      return;
-    }
-    
-    // CORRECCIÓN V30: Asignar progreso de manera explícita y controlada
-    // Empezar desde el final del array (datos más recientes)
-    let dataIndex = progressCopy.length - 1;
-    
-    // Posición a evitar: última columna de la última fila (día actual)
-    const avoidRow = rows - 1;
-    const avoidCol = columns - 1;
-    
-    // CORRECCIÓN V30: Recorrer la matriz de manera más controlada
-    // Empezar desde la penúltima columna (la última está reservada para el día actual)
-    for (let col = columns - 2; col >= 0 && dataIndex >= 0; col--) {
-      // Dentro de cada columna, de abajo hacia arriba
-      for (let row = rows - 1; row >= 0 && dataIndex >= 0; row--) {
-        // Solo asignar si hay un dato de progreso válido para esta posición
-        if (dataIndex >= 0 && dataIndex < progressCopy.length) {
-          // Si el valor es true, marcar como lleno con opacidad completa
-          if (progressCopy[dataIndex] === true) {
-            this.matrixRows[row][col].filled = true;
-            this.matrixRows[row][col].opacity = 1.0;
-          }
-          
-          // Avanzar al siguiente dato
-          dataIndex--;
+
+    const dataLength = this.progressData.length;
+
+    for (let i = 0; i < dataLength; i++) {
+      const age = dataLength - 1 - i; // 0 es hoy
+      const col = columns - 1 - Math.floor(age / rows);
+      const row = rows - 1 - (age % rows);
+
+      if (col >= 0 && col < columns && row >= 0 && row < rows) {
+        if (this.progressData[i]) {
+          this.matrixRows[row][col].filled = true;
+          this.matrixRows[row][col].opacity = 1.0;
         }
       }
     }

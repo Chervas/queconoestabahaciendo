@@ -104,21 +104,11 @@ export class HabitItemComponent implements OnInit {
   }
   
   loadProgressMatrix(): void {
-    // CORRECCIÓN: Usar exactamente 35 columnas x 7 filas = 245 elementos para la matriz
-    const matrixSize = 35 * 7; // 35 columnas x 7 filas
-    
-    // Inicializar con array vacío (todos false)
-    this.progressMatrix = new Array(matrixSize).fill(false);
-    
-    // Solo llenar con datos reales de progreso si existen
-    if (this.habit && this.habit.progress && this.habit.progress.length > 0) {
-      // Obtener datos reales del servicio
-      const realProgress = this.habitService.getProgressMatrix(this.habit.id);
-      
-      // Asegurar que no se exceda el tamaño de la matriz
-      for (let i = 0; i < realProgress.length && i < matrixSize; i++) {
-        this.progressMatrix[i] = realProgress[i];
-      }
+    // Obtener progreso real de los últimos 35 días
+    if (this.habit) {
+      this.progressMatrix = this.habitService.getProgressMatrix(this.habit.id);
+    } else {
+      this.progressMatrix = [];
     }
   }
   

@@ -226,22 +226,22 @@ export class HabitService {
     const habit = this.getHabitById(habitId);
     if (!habit) return [];
 
-    // Generar matriz de progreso para los últimos 30 días
+    // Generar matriz de progreso para los últimos 35 días
     const result: boolean[] = [];
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    for (let i = 29; i >= 0; i--) {
+    for (let i = 34; i >= 0; i--) {
       const date = new Date(today);
       date.setDate(date.getDate() - i);
-      
+
       // Buscar si hay progreso para esta fecha
       const hasProgress = habit.progress.some(p => {
         const progressDate = new Date(p.date);
         progressDate.setHours(0, 0, 0, 0);
         return progressDate.getTime() === date.getTime();
       });
-      
+
       result.push(hasProgress);
     }
 
