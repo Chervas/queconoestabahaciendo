@@ -111,6 +111,47 @@ export class HabitItemComponent implements OnInit {
       this.progressMatrix = [];
     }
   }
+
+  private startOfWeek(date: Date): Date {
+    const d = new Date(date);
+    const day = (d.getDay() + 6) % 7; // lunes = 0
+    d.setDate(d.getDate() - day);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  private startOfMonth(date: Date): Date {
+    const d = new Date(date.getFullYear(), date.getMonth(), 1);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  getCurrentPeriodProgress(): number {
+    if (this.habit.frequency === HabitFrequency.WEEKLY) {
+      return this.getWeekProgress();
+    } else if (this.habit.frequency === HabitFrequency.MONTHLY) {
+      return this.getMonthProgress();
+    }
+    return this.getTodayProgress();
+  }
+
+  private getWeekProgress(): number {
+    const start = this.startOfWeek(new Date());
+    return this.habit.progress.reduce((sum, p) => {
+      const date = new Date(p.date);
+      date.setHours(0, 0, 0, 0);
+      return date >= start ? sum + p.completedCount : sum;
+    }, 0);
+  }
+
+  private getMonthProgress(): number {
+    const start = this.startOfMonth(new Date());
+    return this.habit.progress.reduce((sum, p) => {
+      const date = new Date(p.date);
+      date.setHours(0, 0, 0, 0);
+      return date >= start ? sum + p.completedCount : sum;
+    }, 0);
+  }
   
   onTrackProgress(): void {
     if (!this.isCompleted) {
@@ -200,9 +241,8 @@ export class HabitItemComponent implements OnInit {
     if (!this.habit.hasTarget || !this.habit.targetCount) {
       return '';
     }
-    
-    const todayProgress = this.getTodayProgress();
-    return `${todayProgress}/${this.habit.targetCount}`;
+    const progress = this.getCurrentPeriodProgress();
+    return `${progress}/${this.habit.targetCount}`;
   }
   
   getProgressPercentage(): number {
@@ -210,7 +250,7 @@ export class HabitItemComponent implements OnInit {
       return this.isCompleted ? 100 : 0;
     }
     
-    const todayProgress = this.getTodayProgress();
+    const progress = this.getCurrentPeriodProgress();
     
     // CORRECCIÓN: Asegurar que el valor devuelto sea 100% para hábitos completados
     if (this.isCompleted) {
@@ -218,7 +258,7 @@ export class HabitItemComponent implements OnInit {
     }
     
     // Asegurar que el valor devuelto sea un número entre 0 y 100
-    const percentage = Math.min(100, (todayProgress / this.habit.targetCount) * 100);
+    const percentage = Math.min(100, (progress / this.habit.targetCount) * 100);
     // Evitar NaN o valores negativos
     return isNaN(percentage) || percentage < 0 ? 0 : percentage;
   }

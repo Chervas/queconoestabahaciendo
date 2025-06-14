@@ -18,6 +18,7 @@
   gap: 3px;
   justify-content: space-around;
   width: 100%;
+  min-height: 8px;
 }
 
 .matrix-dot {
@@ -39,6 +40,10 @@
 
 .matrix-dot.filled.today {
   transform: scale(1.2);
+}
+
+.matrix-dot.today {
+  border: 1px solid #1a1a02;
 }
 
 /* Indicadores de progreso (puntos verdes) */
@@ -101,6 +106,7 @@
   
   .matrix-row {
     gap: 2px;
+    min-height: 8px;
   }
 }
 
@@ -112,5 +118,6 @@
   
   .matrix-row {
     gap: 1px;
+    min-height: 8px;
   }
 }

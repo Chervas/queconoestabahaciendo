@@ -21,11 +21,29 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
   @Input() totalProgress: number = 0;
   @Input() habitFrequency: string = 'daily'; // 'daily', 'weekly', 'monthly'
   @Input() matrixColumns: number = 35;
+  // Fecha base opcional para alinear la matriz. Si se establece, la primera
+  // columna representará la semana que comienza en esa fecha.
+  @Input() baseDate: Date | null = null;
   
   matrixRows: MatrixDot[][] = [];
   
   // Días de la semana (7 filas)
   daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+
+  private readonly dayMs = 24 * 60 * 60 * 1000;
+
+  private startOfWeek(date: Date): Date {
+    const d = new Date(date);
+    const day = (d.getDay() + 6) % 7; // Convertir para que lunes sea 0
+    d.setDate(d.getDate() - day);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  private getDayIndex(date: Date): number {
+    const jsDay = date.getDay();
+    return jsDay === 0 ? 6 : jsDay - 1; // Lunes = 0
+  }
   
   ngOnInit(): void {
     this.generateMatrix();
@@ -88,6 +106,7 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
 
     if (this.habitFrequency === 'weekly') {
       const countsPerWeek = new Array(columns).fill(0);
+<<<<<<< HEAD
       for (let i = 0; i < dataLength; i++) {
         const age = dataLength - 1 - i;
         const week = Math.floor(age / 7);
@@ -102,10 +121,46 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
           const row = rows - 1;
           const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
           this.matrixRows[row][col].filled = true;
+=======
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const base = this.baseDate ? new Date(this.baseDate) : today;
+      const baseWeek = this.startOfWeek(base);
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const weekDiff = this.baseDate
+          ? Math.floor((this.startOfWeek(date).getTime() - baseWeek.getTime()) / (7 * this.dayMs))
+          : Math.floor((baseWeek.getTime() - this.startOfWeek(date).getTime()) / (7 * this.dayMs));
+        const col = this.baseDate ? weekDiff : columns - 1 - weekDiff;
+        if (col >= 0 && col < columns) {
+          countsPerWeek[col] += this.progressData[i];
+        }
+      }
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const weekDiff = this.baseDate
+          ? Math.floor((this.startOfWeek(date).getTime() - baseWeek.getTime()) / (7 * this.dayMs))
+          : Math.floor((baseWeek.getTime() - this.startOfWeek(date).getTime()) / (7 * this.dayMs));
+        const col = this.baseDate ? weekDiff : columns - 1 - weekDiff;
+        const row = this.getDayIndex(date);
+        if (col >= 0 && col < columns) {
+          const count = countsPerWeek[col];
+          if (this.progressData[i] > 0) {
+            this.matrixRows[row][col].filled = true;
+          }
+          const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
+>>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
           this.matrixRows[row][col].opacity = opacity;
         }
       }
     } else if (this.habitFrequency === 'monthly') {
+<<<<<<< HEAD
       const daysPerMonth = 30;
       const countsPerMonth = new Array(columns).fill(0);
       for (let i = 0; i < dataLength; i++) {
@@ -122,16 +177,72 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
           const row = rows - 1;
           const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
           this.matrixRows[row][col].filled = true;
+=======
+      const countsPerMonth = new Array(columns).fill(0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const base = this.baseDate ? new Date(this.baseDate) : today;
+      const baseMonth = new Date(base.getFullYear(), base.getMonth(), 1);
+      baseMonth.setHours(0, 0, 0, 0);
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const monthDiff = this.baseDate
+          ? (date.getFullYear() - baseMonth.getFullYear()) * 12 + date.getMonth() - baseMonth.getMonth()
+          : (baseMonth.getFullYear() - date.getFullYear()) * 12 + baseMonth.getMonth() - date.getMonth();
+        const col = this.baseDate ? monthDiff : columns - 1 - monthDiff;
+        if (col >= 0 && col < columns) {
+          countsPerMonth[col] += this.progressData[i];
+        }
+      }
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const monthDiff = this.baseDate
+          ? (date.getFullYear() - baseMonth.getFullYear()) * 12 + date.getMonth() - baseMonth.getMonth()
+          : (baseMonth.getFullYear() - date.getFullYear()) * 12 + baseMonth.getMonth() - date.getMonth();
+        const col = this.baseDate ? monthDiff : columns - 1 - monthDiff;
+        const row = this.getDayIndex(date);
+        if (col >= 0 && col < columns) {
+          const count = countsPerMonth[col];
+          if (this.progressData[i] > 0) {
+            this.matrixRows[row][col].filled = true;
+          }
+          const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
+>>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
           this.matrixRows[row][col].opacity = opacity;
         }
       }
     } else {
+<<<<<<< HEAD
       for (let i = 0; i < dataLength; i++) {
         const age = dataLength - 1 - i; // 0 es hoy
         const col = columns - 1 - Math.floor(age / rows);
         const row = rows - 1 - (age % rows);
 
         if (col >= 0 && col < columns && row >= 0 && row < rows) {
+=======
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const base = this.baseDate ? new Date(this.baseDate) : today;
+      const baseWeek = this.startOfWeek(base);
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i; // 0 es hoy
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const weekDiff = this.baseDate
+          ? Math.floor((this.startOfWeek(date).getTime() - baseWeek.getTime()) / (7 * this.dayMs))
+          : Math.floor((baseWeek.getTime() - this.startOfWeek(date).getTime()) / (7 * this.dayMs));
+        const col = this.baseDate ? weekDiff : columns - 1 - weekDiff;
+        const row = this.getDayIndex(date);
+
+        if (col >= 0 && col < columns) {
+>>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
           if (this.progressData[i] > 0) {
             this.matrixRows[row][col].filled = true;
             this.matrixRows[row][col].opacity = this.habitFrequency === 'quit' ? 1.0 : 1.0;
@@ -148,12 +259,23 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
     // Convertir a nuestro formato donde 0 es lunes, 6 es domingo
     const todayIndex = today === 0 ? 6 : today - 1;
     
-    // Última columna
-    const lastCol = columns - 1;
+    // Columna donde se encuentra la semana actual
+    const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
+    const base = this.baseDate ? new Date(this.baseDate) : todayDate;
+    const baseWeek = this.startOfWeek(base);
+    const todayWeekDiff = this.baseDate
+      ? Math.floor((this.startOfWeek(todayDate).getTime() - baseWeek.getTime()) / (7 * this.dayMs))
+      : 0;
+    const lastCol = this.baseDate ? todayWeekDiff : columns - 1;
     
     // CORRECCIÓN V30: Asegurar que el punto del día actual se coloque en la fila correcta
+<<<<<<< HEAD
     const rows = this.matrixRows.length;
     const targetRow = this.habitFrequency === 'weekly' || this.habitFrequency === 'monthly' ? rows - 1 : todayIndex;
+=======
+    const targetRow = todayIndex;
+>>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
 
     if (this.matrixRows[targetRow] && this.matrixRows[targetRow][lastCol]) {
       this.matrixRows[targetRow][lastCol].isToday = true;

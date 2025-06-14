@@ -35,6 +35,7 @@ export class HistorialComponent implements OnInit {
   isLoading = true;
   tasksCompleted: HistoryEntry[] = [];
   activeHabits: Habit[] = [];
+  startOfYear: Date;
 
   constructor(
     private historyService: HistoryService,
@@ -48,6 +49,9 @@ export class HistorialComponent implements OnInit {
       this.tasksCompleted = this.displayedHistoryEntries.filter(e => e.type === HistoryEntryType.TASK_COMPLETED);
       this.activeHabits = this.habitService.getHabits();
     });
+
+    const now = new Date();
+    this.startOfYear = new Date(now.getFullYear(), 0, 1);
   }
 
   ngOnInit(): void {

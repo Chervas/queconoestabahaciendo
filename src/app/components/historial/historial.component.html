@@ -27,7 +27,8 @@
           [matrixColumns]="53"
           [currentProgress]="getCurrentProgress(h)"
           [totalProgress]="h.hasTarget ? h.targetCount || 0 : 0"
-          [habitFrequency]="h.type === 'quit' ? 'quit' : h.frequency">
+          [habitFrequency]="h.type === 'quit' ? 'quit' : h.frequency"
+          [baseDate]="startOfYear">
         </app-progress-matrix>
       </mat-card>
     </div>
