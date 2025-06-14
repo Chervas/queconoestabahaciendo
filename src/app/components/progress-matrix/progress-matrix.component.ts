@@ -123,17 +123,26 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
           countsPerWeek[col] += this.progressData[i];
         }
       }
-      for (let col = 0; col < columns; col++) {
-        const count = countsPerWeek[col];
-        if (count > 0) {
-          const row = rows - 1;
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const weekDiff = this.baseDate
+          ? Math.floor((this.startOfWeek(date).getTime() - baseWeek.getTime()) / (7 * this.dayMs))
+          : Math.floor((baseWeek.getTime() - this.startOfWeek(date).getTime()) / (7 * this.dayMs));
+        const col = this.baseDate ? weekDiff : columns - 1 - weekDiff;
+        const row = this.getDayIndex(date);
+        if (col >= 0 && col < columns) {
+          const count = countsPerWeek[col];
+          if (this.progressData[i] > 0) {
+            this.matrixRows[row][col].filled = true;
+          }
           const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
-          this.matrixRows[row][col].filled = true;
           this.matrixRows[row][col].opacity = opacity;
         }
       }
     } else if (this.habitFrequency === 'monthly') {
-      const daysPerMonth = 30;
       const countsPerMonth = new Array(columns).fill(0);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -153,12 +162,22 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
           countsPerMonth[col] += this.progressData[i];
         }
       }
-      for (let col = 0; col < columns; col++) {
-        const count = countsPerMonth[col];
-        if (count > 0) {
-          const row = rows - 1;
+
+      for (let i = 0; i < dataLength; i++) {
+        const age = dataLength - 1 - i;
+        const date = new Date(today);
+        date.setDate(today.getDate() - age);
+        const monthDiff = this.baseDate
+          ? (date.getFullYear() - baseMonth.getFullYear()) * 12 + date.getMonth() - baseMonth.getMonth()
+          : (baseMonth.getFullYear() - date.getFullYear()) * 12 + baseMonth.getMonth() - date.getMonth();
+        const col = this.baseDate ? monthDiff : columns - 1 - monthDiff;
+        const row = this.getDayIndex(date);
+        if (col >= 0 && col < columns) {
+          const count = countsPerMonth[col];
+          if (this.progressData[i] > 0) {
+            this.matrixRows[row][col].filled = true;
+          }
           const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
-          this.matrixRows[row][col].filled = true;
           this.matrixRows[row][col].opacity = opacity;
         }
       }
@@ -206,8 +225,7 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
     const lastCol = this.baseDate ? todayWeekDiff : columns - 1;
     
     // CORRECCIÓN V30: Asegurar que el punto del día actual se coloque en la fila correcta
-    const rows = this.matrixRows.length;
-    const targetRow = this.habitFrequency === 'weekly' || this.habitFrequency === 'monthly' ? rows - 1 : todayIndex;
+    const targetRow = todayIndex;
 
     if (this.matrixRows[targetRow] && this.matrixRows[targetRow][lastCol]) {
       this.matrixRows[targetRow][lastCol].isToday = true;
