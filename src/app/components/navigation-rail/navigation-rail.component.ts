@@ -43,7 +43,7 @@ export class NavigationRailComponent implements OnInit {
   workSections: NavigationItem[] = [
     { id: 'tasks', icon: 'task_alt', label: 'Tareas', route: '/' },
     { id: 'habits', icon: 'checklist', label: 'Hábitos', route: '/habits' },
-    { id: 'history', icon: 'history', label: 'Historial', route: '/history' }
+    { id: 'history', icon: 'history', label: 'Historial', route: '/historial' }
   ];
   
   // Secciones para fase de recreo

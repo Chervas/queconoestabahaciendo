@@ -87,7 +87,7 @@ export class MainLayoutComponent implements OnInit {
   }
 
   navigateToHistory(): void {
-    this.router.navigate(['/history']);
+    this.router.navigate(['/historial']);
     this.activeSection = 'history';
   }
 
@@ -202,7 +202,7 @@ export class MainLayoutComponent implements OnInit {
         this.router.navigate(['/habits']);
         break;
       case 'history':
-        this.router.navigate(['/history']);
+        this.router.navigate(['/historial']);
         break;
       case 'island':
         this.router.navigate(['/mi-isla']);

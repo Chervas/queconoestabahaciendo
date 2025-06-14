@@ -134,7 +134,10 @@ export class HabitFormComponent implements OnInit {
   }
   
   onSubmit(): void {
-    if (this.habitForm.invalid) return;
+    if (this.habitForm.invalid) {
+      this.habitForm.markAllAsTouched();
+      return;
+    }
     
     const formValues = this.habitForm.getRawValue(); // Incluye valores deshabilitados
     

@@ -3,9 +3,9 @@ import { MainLayoutComponent } from './components/main-layout/main-layout.compon
 
 export const routes: Routes = [
   { path: '', component: MainLayoutComponent }, // Default route to MainLayoutComponent
-  { 
-    path: 'history', 
-    loadComponent: () => import('./components/history-view/history-view.component').then(m => m.HistoryViewComponent) 
+  {
+    path: 'historial',
+    loadComponent: () => import('./components/historial/historial.component').then(m => m.HistorialComponent)
   },
   { 
     path: 'mi-isla', 

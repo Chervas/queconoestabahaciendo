@@ -48,7 +48,7 @@ export class HabitItemComponent implements OnInit {
   @ViewChild('progressBar', { static: false }) progressBarRef!: ElementRef;
   
   isCompleted = false;
-  progressMatrix: boolean[] = [];
+  progressMatrix: number[] = [];
   animationState = 'initial';
   checkmarkState = 'hidden';
   progressPercentage = 0;
@@ -106,7 +106,7 @@ export class HabitItemComponent implements OnInit {
   loadProgressMatrix(): void {
     // Obtener progreso real de los últimos 35 días
     if (this.habit) {
-      this.progressMatrix = this.habitService.getProgressMatrix(this.habit.id);
+      this.progressMatrix = this.habitService.getProgressCounts(this.habit.id);
     } else {
       this.progressMatrix = [];
     }
