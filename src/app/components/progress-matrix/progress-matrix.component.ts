@@ -106,22 +106,6 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
 
     if (this.habitFrequency === 'weekly') {
       const countsPerWeek = new Array(columns).fill(0);
-<<<<<<< HEAD
-      for (let i = 0; i < dataLength; i++) {
-        const age = dataLength - 1 - i;
-        const week = Math.floor(age / 7);
-        const col = columns - 1 - week;
-        if (col >= 0) {
-          countsPerWeek[col] += this.progressData[i];
-        }
-      }
-      for (let col = 0; col < columns; col++) {
-        const count = countsPerWeek[col];
-        if (count > 0) {
-          const row = rows - 1;
-          const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
-          this.matrixRows[row][col].filled = true;
-=======
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const base = this.baseDate ? new Date(this.baseDate) : today;
@@ -155,29 +139,10 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
             this.matrixRows[row][col].filled = true;
           }
           const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
->>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
           this.matrixRows[row][col].opacity = opacity;
         }
       }
     } else if (this.habitFrequency === 'monthly') {
-<<<<<<< HEAD
-      const daysPerMonth = 30;
-      const countsPerMonth = new Array(columns).fill(0);
-      for (let i = 0; i < dataLength; i++) {
-        const age = dataLength - 1 - i;
-        const month = Math.floor(age / daysPerMonth);
-        const col = columns - 1 - month;
-        if (col >= 0) {
-          countsPerMonth[col] += this.progressData[i];
-        }
-      }
-      for (let col = 0; col < columns; col++) {
-        const count = countsPerMonth[col];
-        if (count > 0) {
-          const row = rows - 1;
-          const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
-          this.matrixRows[row][col].filled = true;
-=======
       const countsPerMonth = new Array(columns).fill(0);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -213,19 +178,10 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
             this.matrixRows[row][col].filled = true;
           }
           const opacity = this.totalProgress > 0 ? Math.min(1, count / this.totalProgress) : 1;
->>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
           this.matrixRows[row][col].opacity = opacity;
         }
       }
     } else {
-<<<<<<< HEAD
-      for (let i = 0; i < dataLength; i++) {
-        const age = dataLength - 1 - i; // 0 es hoy
-        const col = columns - 1 - Math.floor(age / rows);
-        const row = rows - 1 - (age % rows);
-
-        if (col >= 0 && col < columns && row >= 0 && row < rows) {
-=======
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       const base = this.baseDate ? new Date(this.baseDate) : today;
@@ -242,7 +198,6 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
         const row = this.getDayIndex(date);
 
         if (col >= 0 && col < columns) {
->>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
           if (this.progressData[i] > 0) {
             this.matrixRows[row][col].filled = true;
             this.matrixRows[row][col].opacity = this.habitFrequency === 'quit' ? 1.0 : 1.0;
@@ -270,12 +225,7 @@ export class ProgressMatrixComponent implements OnInit, OnChanges {
     const lastCol = this.baseDate ? todayWeekDiff : columns - 1;
     
     // CORRECCIÓN V30: Asegurar que el punto del día actual se coloque en la fila correcta
-<<<<<<< HEAD
-    const rows = this.matrixRows.length;
-    const targetRow = this.habitFrequency === 'weekly' || this.habitFrequency === 'monthly' ? rows - 1 : todayIndex;
-=======
     const targetRow = todayIndex;
->>>>>>> codex/actualizar-lógica-de-matrices-de-hábitos
 
     if (this.matrixRows[targetRow] && this.matrixRows[targetRow][lastCol]) {
       this.matrixRows[targetRow][lastCol].isToday = true;
