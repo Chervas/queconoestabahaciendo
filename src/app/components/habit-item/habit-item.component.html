@@ -31,7 +31,7 @@
   <div class="habit-matrix">
     <app-progress-matrix
       [progressData]="progressMatrix"
-      [currentProgress]="getTodayProgress()"
+      [currentProgress]="getCurrentPeriodProgress()"
       [totalProgress]="habit.hasTarget ? habit.targetCount : 1"
       [habitFrequency]="habit.type === habitType.QUIT ? 'quit' : habit.frequency"
       >
