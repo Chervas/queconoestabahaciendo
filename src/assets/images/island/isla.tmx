@@ -1,8 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="48" tileheight="48" infinite="0" nextlayerid="9" nextobjectid="11">
- <tileset firstgid="1" source="aguasyhierbas.tsx"/>
- <tileset firstgid="361" source="tierras.tsx"/>
- <tileset firstgid="841" source="naturaleza.tsx"/>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="48" tileheight="48" infinite="0" nextlayerid="10" nextobjectid="11">
+ <editorsettings>
+  <export target="../../../../../../Documents/qceh/isla.tmj" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" name="aguasyhierbas" tilewidth="48" tileheight="48" tilecount="360" columns="18">
+  <image source="../../../../../../Documents/qceh/Pocket Valley - Essentials/48x48/tilesets/Other Engines/Outside_A1.png" trans="000000" width="864" height="960"/>
+  <tile id="1">
+   <animation>
+    <frame tileid="1" duration="500"/>
+    <frame tileid="4" duration="500"/>
+    <frame tileid="7" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="2">
+   <animation>
+    <frame tileid="2" duration="500"/>
+    <frame tileid="5" duration="500"/>
+    <frame tileid="8" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="9">
+   <animation>
+    <frame tileid="9" duration="500"/>
+    <frame tileid="12" duration="500"/>
+    <frame tileid="15" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="19">
+   <animation>
+    <frame tileid="19" duration="500"/>
+    <frame tileid="22" duration="500"/>
+    <frame tileid="25" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="20">
+   <animation>
+    <frame tileid="20" duration="500"/>
+    <frame tileid="23" duration="500"/>
+    <frame tileid="26" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="36">
+   <animation>
+    <frame tileid="216" duration="500"/>
+    <frame tileid="219" duration="500"/>
+    <frame tileid="222" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="37">
+   <animation>
+    <frame tileid="37" duration="500"/>
+    <frame tileid="40" duration="500"/>
+    <frame tileid="43" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="38">
+   <animation>
+    <frame tileid="218" duration="500"/>
+    <frame tileid="221" duration="500"/>
+    <frame tileid="224" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="54">
+   <properties>
+    <property name="solid" value="true"/>
+   </properties>
+   <animation>
+    <frame tileid="54" duration="500"/>
+    <frame tileid="57" duration="500"/>
+    <frame tileid="60" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="55">
+   <animation>
+    <frame tileid="55" duration="500"/>
+    <frame tileid="58" duration="500"/>
+    <frame tileid="61" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="56">
+   <animation>
+    <frame tileid="56" duration="500"/>
+    <frame tileid="59" duration="500"/>
+    <frame tileid="62" duration="500"/>
+   </animation>
+  </tile>
+  <tile id="126">
+   <animation>
+    <frame tileid="126" duration="100"/>
+    <frame tileid="129" duration="100"/>
+    <frame tileid="132" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <tileset firstgid="361" name="tierras" tilewidth="48" tileheight="48" tilecount="480" columns="24">
+  <image source="../../../../../../Documents/qceh/Pocket Valley - Essentials/48x48/tilesets/Other Engines/Outside_A2.png" trans="000000" width="1152" height="960"/>
+ </tileset>
+ <tileset firstgid="841" name="naturaleza" tilewidth="48" tileheight="48" tilecount="256" columns="16">
+  <image source="../../../../../../Documents/qceh/Pocket Valley - Essentials/48x48/tilesets/rpgmaker mv_mz/nature_b_c_d_e.png" trans="000000" width="768" height="768"/>
+ </tileset>
  <layer id="1" name="mar" width="100" height="100">
   <data encoding="csv">
 56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,56,
@@ -315,14 +411,4 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="8" name="obstaculos">
-  <object id="3" x="2403.33" y="4128.89" width="330" height="44.4444"/>
-  <object id="4" x="2785.56" y="4126.67" width="94.4444" height="47.7778"/>
-  <object id="5" x="2880" y="3841.11" width="47.7778" height="527.778"/>
-  <object id="6" x="2353.33" y="3790" width="576.667" height="50"/>
-  <object id="7" x="2351.11" y="3841.11" width="46.6667" height="525.556"/>
-  <object id="8" x="2398.89" y="3838.89" width="46.6667" height="43.3333"/>
-  <object id="9" x="2834.44" y="3841.11" width="46.6667" height="46.6667"/>
-  <object id="10" x="2352.22" y="4371.11" width="578.889" height="46.6667"/>
- </objectgroup>
 </map>
